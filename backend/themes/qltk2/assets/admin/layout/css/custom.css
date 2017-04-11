@@ -1,0 +1,31 @@
+#housebill-date_of_house_bill_of_lading{
+     z-index: 2 !important;
+ }
+.dropdown-menu li > a:hover, .dropdown-menu .active > a, .dropdown-menu .active > a:hover{
+    background-color: #8bc3db;
+}
+.modal {
+    z-index: 1000 !important;
+}
+.page-header.navbar.navbar-fixed-top {
+    z-index: 900;
+}
+input:focus {
+    border: 3px solid #2a2929;
+    background-color: #d4ebff;
+}
+#modal-xemchitiethbl .row{
+    margin-top: 10px;
+    font-size: 11pt;
+}
+.has-error .help-block, .has-error .help-inline, .has-error .control-label, .has-error .radio, .has-error .checkbox, .has-error .radio-inline, .has-error .checkbox-inline{
+    color: #a94442;
+}
+.row.no-margin .form-group{
+    margin-bottom: 0px;
+}
+@media screen {
+    #print-block{
+        display: none;
+    }
+}

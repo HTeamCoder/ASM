@@ -1,0 +1,21 @@
+;-	Đưa lên phía trên (rộng phía dưới để thể hiện thông tin hàng bán)
+;-	Lọc tìm theo tên /hoặc mã đối tượng (kiểu gợi nhắc)
+;(Chị chỉ có thể nhớ tên hoặc mã đối tượng chứ không thể nhớ hết được số điện thoại khách)
+;Thông tin hàng bán:
+;-	Em đưa cột mã hàng/ số serial ngang với tên hàng, ĐVT, S.lượng… để khi nhập xong 1 đối tượng, có thể tab hoặc enter
+;để đến đối tượng hàng hóa bán tiếp theo trong cùng 1 phiếu.
+;(hiện tại em đang để hơi mất công 1 tí vì phải quay lại phía trên để chọn mã hàng hoặc serial)
+;-	Chọn thông tin hàng bán kiểu gợi nhắc ở cột mã hàng/ hoặc tên hàng/ hoặc serial
+;* Phần mềm hiện tại:
+;- Khi cảnh báo em đưa cảnh báo hiển thị trên màn hình trước (hiện giờ cảnh báo trên đầu, nếu không để ý mà enter thêm lần nữa thì toàn bộ dữ liệu trong thao tác vừa lập sẽ mất).
+;- Muốn sửa mã của hàng hóa (chỉ mã thôi nhé) thì lại phải nhập lại toàn bộ thông số, tên hàng, quy cách… của hàng hóa đó.
+;
+;* Phần hiện tại có vậy thôi. Chắc OK rồi đó. (:D)
+;Thank em
+
+* Tiếp theo:
+- Cố gắng đưa giúp chị các chứng năng:
+;- in phiếu
+- nhập mua hàng
+- Phiếu thu – chi
+- Hàng trả lại (mua trả lại – bán trả lại)
