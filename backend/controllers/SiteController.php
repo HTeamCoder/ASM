@@ -1,7 +1,7 @@
 <?php
 namespace backend\controllers;
 
-//use common\models\AccessRules;
+//use common\models\AccessRules; cccc
 use backend\models\ChiPhiKhac;
 use backend\models\DonViTinh;
 use backend\models\HouseBill;
