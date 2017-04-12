@@ -1,6 +1,7 @@
 <?php
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use kartik\select2\Select2;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\Khuvuc */
@@ -13,11 +14,16 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'code')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'parent_id')->textInput() ?>
-
-    <?= $form->field($model, 'child_id')->textInput() ?>
+    <?= $form->field($model, 'kieu')->dropDownList(['tinhthanh' => 'Tỉnh/Thành phố', 'quanhuyen' => 'Quận/Huyện', 'phuongxa' => 'Phường/Xã'])->label('Phân cấp') ?>
+    
+   <?= $form->field($model, 'parent_id')->widget(Select2::classname(), [
+        'data' =>\yii\helpers\ArrayHelper::map(\common\models\myFuncs::dsNhom($khuvuc = new \backend\models\Khuvuc(),NULL),'id','name'),
+        'language' => 'vi',
+           'options' => ['placeholder' => 'Không trực thuộc khu vực nào ...'],
+           'pluginOptions' => [
+               'allowClear' => true
+           ],
+        ])->label('Khu vực trực thuộc'); ?>
 
   
 	<?php if (!Yii::$app->request->isAjax){ ?>

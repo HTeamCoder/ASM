@@ -13,8 +13,11 @@ use yii\widgets\DetailView;
             'id',
             'name',
             'code',
-            'parent_id',
-            'child_id',
+            [
+                'attribute'=>'parent_id',
+                'label'=>'Khu vực trực thuộc',
+                'value'=> ($model->kieu == 'tinhthanh')?'':(($model->kieu == 'quanhuyen')?'Tỉnh/Thành phố '.$model->parent->name:'Quận/Huyện '.$model->parent->name)
+            ]
         ],
     ]) ?>
 

@@ -18,8 +18,8 @@ class KhuvucSearch extends Khuvuc
     public function rules()
     {
         return [
-            [['id', 'parent_id', 'child_id'], 'integer'],
-            [['name', 'code'], 'safe'],
+            [['id', 'parent_id'], 'integer'],
+            [['name', 'code','kieu'], 'safe'],
         ];
     }
 
@@ -58,11 +58,10 @@ class KhuvucSearch extends Khuvuc
         $query->andFilterWhere([
             'id' => $this->id,
             'parent_id' => $this->parent_id,
-            'child_id' => $this->child_id,
+            'kieu' => $this->kieu,
         ]);
 
-        $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'code', $this->code]);
+        $query->andFilterWhere(['like', 'name', $this->name]);
 
         return $dataProvider;
     }

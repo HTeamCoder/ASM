@@ -13,7 +13,6 @@ use yii\widgets\DetailView;
             'id',
             'name',
             'code',
-            'khoa_id',
         ],
     ]) ?>
 

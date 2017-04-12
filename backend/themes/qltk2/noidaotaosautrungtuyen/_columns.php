@@ -4,11 +4,11 @@ use yii\helpers\Url;
 return [
     [
         'class' => 'kartik\grid\CheckboxColumn',
-        'width' => '20px',
+        'width' => '3%',
     ],
     [
         'class' => 'kartik\grid\SerialColumn',
-        'width' => '30px',
+        'width' => '3%',
     ],
         // [
         // 'class'=>'\kartik\grid\DataColumn',
@@ -23,20 +23,36 @@ return [
         'attribute'=>'code',
     ],
     [
-        'class' => 'kartik\grid\ActionColumn',
-        'dropdown' => false,
-        'vAlign'=>'middle',
-        'urlCreator' => function($action, $model, $key, $index) { 
-                return Url::to([$action,'id'=>$key]);
+        'value' => function($data){
+            return \yii\bootstrap\Html::a('<i class="fa fa-eye"></i>',Url::to(['view','id'=>$data->id]), ['class' => 'text-gray','role'=>'modal-remote','title'=>'View','data-toggle'=>'tooltip']);
         },
-        'viewOptions'=>['role'=>'modal-remote','title'=>'View','data-toggle'=>'tooltip'],
-        'updateOptions'=>['role'=>'modal-remote','title'=>'Update', 'data-toggle'=>'tooltip'],
-        'deleteOptions'=>['role'=>'modal-remote','title'=>'Delete', 
+        'label' => 'Xem',
+        'format' => 'raw',
+        'contentOptions' => ['class' => 'text-center','style'=>'width:3%;'],
+        'headerOptions' => ['class' => 'text-center','style'=>'width:3%;']
+    ],
+    [
+        'value' => function($data){
+            return \yii\bootstrap\Html::a('<i class="fa fa-edit"></i>',Url::to(['update','id'=>$data->id]), ['class' => 'text-gray','role'=>'modal-remote','title'=>'Update', 'data-toggle'=>'tooltip']);
+        },
+        'label' => 'Sửa',
+        'format' => 'raw',
+        'contentOptions' => ['class' => 'text-center','style'=>'width:3%;'],
+        'headerOptions' => ['class' => 'text-center','style'=>'width:3%;']
+    ],
+    [
+        'value' => function($data){
+            return \yii\bootstrap\Html::a('<i class="fa fa-trash"></i>',Url::to(['delete','id'=>$data->id]), ['class' => 'text-gray','role'=>'modal-remote','title'=>'Delete', 
                           'data-confirm'=>false, 'data-method'=>false,// for overide yii data api
                           'data-request-method'=>'post',
                           'data-toggle'=>'tooltip',
-                          'data-confirm-title'=>'Are you sure?',
-                          'data-confirm-message'=>'Are you sure want to delete this item'], 
-    ],
+                           'data-confirm-title'=>'Bạn có chắc chắn không ?',
+                            'data-confirm-message'=>'Bạn có chắc chắn muốn xóa không ?']);
+        },
+        'label' => 'Xóa',
+        'format' => 'raw',
+        'contentOptions' => ['class' => 'text-center','style'=>'width:3%;'],
+        'headerOptions' => ['class' => 'text-center','style'=>'width:3%;']
+    ]
 
 ];   

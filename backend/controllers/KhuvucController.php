@@ -10,7 +10,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use \yii\web\Response;
 use yii\helpers\Html;
-
+use yii\helpers\Json;
 /**
  * KhuvucController implements the CRUD actions for Khuvuc model.
  */
@@ -59,12 +59,12 @@ class KhuvucController extends Controller
         if($request->isAjax){
             Yii::$app->response->format = Response::FORMAT_JSON;
             return [
-                    'title'=> "Khuvuc #".$id,
+                    'title'=> "Khu vực #".$id,
                     'content'=>$this->renderAjax('view', [
                         'model' => $this->findModel($id),
                     ]),
-                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                            Html::a('Edit',['update','id'=>$id],['class'=>'btn btn-primary','role'=>'modal-remote'])
+                    'footer'=> Html::button('Đóng',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                            Html::a('Chỉnh sửa',['update','id'=>$id],['class'=>'btn btn-primary','role'=>'modal-remote'])
                 ];    
         }else{
             return $this->render('view', [
@@ -91,31 +91,31 @@ class KhuvucController extends Controller
             Yii::$app->response->format = Response::FORMAT_JSON;
             if($request->isGet){
                 return [
-                    'title'=> "Create new Khuvuc",
+                    'title'=> "Thêm mới khu vực",
                     'content'=>$this->renderAjax('create', [
                         'model' => $model,
                     ]),
-                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                                Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
+                    'footer'=> Html::button('Đóng',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                                Html::button('Lưu lại',['class'=>'btn btn-primary','type'=>"submit",'id'=>'btn-save'])
         
                 ];         
             }else if($model->load($request->post()) && $model->save()){
                 return [
                     'forceReload'=>'#crud-datatable-pjax',
-                    'title'=> "Create new Khuvuc",
-                    'content'=>'<span class="text-success">Create Khuvuc success</span>',
-                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                            Html::a('Create More',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
+                    'title'=> "Thêm mới khu vực",
+                    'content'=>'<span class="text-success">Thêm mới khu vực thành công</span>',
+                    'footer'=> Html::button('Đóng',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                            Html::a('Thêm mới khu vực',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
         
                 ];         
             }else{           
                 return [
-                    'title'=> "Create new Khuvuc",
+                    'title'=> "Thêm mới khu vực",
                     'content'=>$this->renderAjax('create', [
                         'model' => $model,
                     ]),
-                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                                Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
+                    'footer'=> Html::button('Đóng',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                                Html::button('Lưu lại',['class'=>'btn btn-primary','type'=>"submit",'id'=>'btn-save'])
         
                 ];         
             }
@@ -153,31 +153,31 @@ class KhuvucController extends Controller
             Yii::$app->response->format = Response::FORMAT_JSON;
             if($request->isGet){
                 return [
-                    'title'=> "Update Khuvuc #".$id,
+                    'title'=> "Cập nhật khu vực #".$id,
                     'content'=>$this->renderAjax('update', [
                         'model' => $model,
                     ]),
-                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                                Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
+                    'footer'=> Html::button('Đóng',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                                Html::button('Lưu lại',['class'=>'btn btn-primary','type'=>"submit",'id'=>'btn-save'])
                 ];         
             }else if($model->load($request->post()) && $model->save()){
                 return [
                     'forceReload'=>'#crud-datatable-pjax',
-                    'title'=> "Khuvuc #".$id,
+                    'title'=> "Khu vực #".$id,
                     'content'=>$this->renderAjax('view', [
                         'model' => $model,
                     ]),
-                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                            Html::a('Edit',['update','id'=>$id],['class'=>'btn btn-primary','role'=>'modal-remote'])
+                    'footer'=> Html::button('Đóng',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                            Html::a('Chỉnh sửa',['update','id'=>$id],['class'=>'btn btn-primary','role'=>'modal-remote'])
                 ];    
             }else{
                  return [
-                    'title'=> "Update Khuvuc #".$id,
+                    'title'=> "Cập nhật khu vực #".$id,
                     'content'=>$this->renderAjax('update', [
                         'model' => $model,
                     ]),
-                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                                Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
+                    'footer'=> Html::button('Đóng',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                                Html::button('Lưu lại',['class'=>'btn btn-primary','type'=>"submit",'id'=>'btn-save'])
                 ];        
             }
         }else{
@@ -267,5 +267,41 @@ class KhuvucController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+
+
+    public function actionGettree(){
+        $khuvucs = Khuvuc::find()->where('parent_id is null')->all();
+        $data = [];
+        if (count($khuvucs))
+        {
+            foreach ($khuvucs as $khuvuc) {
+                $content = ['text' => $khuvuc->name, 'icon' => 'fa fa-globe icon-state-success'];
+                foreach ($khuvuc->khuvucs as $key=>$khuvuccon) {
+                    $content['children'][] = [
+                        'text' => $khuvuccon->name,
+                        'icon' => 'fa fa-university icon-state-warning',
+                    ];
+                    foreach ($khuvuccon->khuvucs as $khuvuccon) {
+                        $content['children'][$key]['children'][] = [
+                            'text' => $khuvuccon->name,
+                            'icon' => 'fa fa-home icon-state-warning'
+                        ];
+                    }
+                }
+                $data[] = $content;
+            }
+        }else
+        {
+            $data[] = array(
+                "id" => "node_all",
+                "text" => "Chưa có khu vực nào",
+                "icon" => "fa fa-globe icon-lg icon-state-info",
+                "children" => false,
+                "type" => "root"
+            );
+        }
+        
+        echo Json::encode($data);
     }
 }

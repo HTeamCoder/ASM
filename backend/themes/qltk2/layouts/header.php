@@ -63,9 +63,6 @@ $role = User::getRole();
                         <li class="classic-menu-dropdown">
                             <?=Html::a('<i class="fa fa-bookmark-o"></i> Nơi đào tạo sau trúng tuyển', Yii::$app->urlManager->createUrl(['noidaotaosautrungtuyen']))?>
                         </li>
-                        <li class="classic-menu-dropdown">
-                            <?=Html::a('<i class="fa fa-bookmark-o"></i> Cấu hình', Yii::$app->urlManager->createUrl(['cauhinh']))?>
-                        </li>
                     </ul>
                 </li>
                 <li class="classic-menu-dropdown">

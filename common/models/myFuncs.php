@@ -187,5 +187,37 @@ class myFuncs
 
         return ucfirst($textnumber." đồng chẵn");
     }
+    public static function duyetNhom($object,$parentid = 0,$space = '--', $trees = NULL){
+        if(!$trees) $trees = array();
+        $nhoms = $object::find()->where(['parent_id' => $parentid])->all();
+        /** @var  $nhom  Daily*/
+        foreach ($nhoms as $nhom) {
+            $trees[] = array('id'=>$nhom->id,'name'=>$space.$nhom->name);
+            $trees = myFuncs::duyetNhom($object,$nhom->id,"|--".$space,$trees);
+        }
 
+        return $trees;
+    }
+
+    public static function dsNhom($object){
+        $danhmuccons =$object::find()->where('parent_id is null')->all();
+        $trees = array();
+        /** @var  $danhmuccon Daily */
+        foreach ($danhmuccons as $danhmuccon) {
+            $trees[] = array('id'=>$danhmuccon->id, 'name'=>$danhmuccon->name);
+            $trees = myFuncs::duyetNhom($object,$danhmuccon->id,'|--',$trees);
+        }
+        return $trees;
+    }
+
+    public static function dataTree($object,$parentid = NULL,$trees){
+        $trees =[];
+        $danhmuccons = $object::find()->where(['parent_id'=>$parentid])->all();
+        foreach ($danhmuccons as $danhmuccon) {
+            $nodes =[];
+            $nodes = myFuncs::dataTree($object,$danhmuccon->id,$nodes);
+            $trees[] = ['id'=>$danhmuccon->id,'name'=>$danhmuccon->name,'nodes'=>$nodes];
+        }
+        return $trees;
+    }
 }
