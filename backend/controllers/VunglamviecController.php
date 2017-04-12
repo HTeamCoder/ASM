@@ -3,8 +3,8 @@
 namespace backend\controllers;
 
 use Yii;
-use backend\models\Hangmuc;
-use backend\models\search\HangmucSearch;
+use backend\models\Vunglamviec;
+use backend\models\search\VunglamviecSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -12,9 +12,9 @@ use \yii\web\Response;
 use yii\helpers\Html;
 
 /**
- * HangmucController implements the CRUD actions for Hangmuc model.
+ * VunglamviecController implements the CRUD actions for Vunglamviec model.
  */
-class HangmucController extends Controller
+class VunglamviecController extends Controller
 {
     /**
      * @inheritdoc
@@ -33,12 +33,12 @@ class HangmucController extends Controller
     }
 
     /**
-     * Lists all Hangmuc models.
+     * Lists all Vunglamviec models.
      * @return mixed
      */
     public function actionIndex()
     {    
-        $searchModel = new HangmucSearch();
+        $searchModel = new VunglamviecSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -49,7 +49,7 @@ class HangmucController extends Controller
 
 
     /**
-     * Displays a single Hangmuc model.
+     * Displays a single Vunglamviec model.
      * @param integer $id
      * @return mixed
      */
@@ -59,12 +59,12 @@ class HangmucController extends Controller
         if($request->isAjax){
             Yii::$app->response->format = Response::FORMAT_JSON;
             return [
-                    'title'=> "Hạng mục #".$id,
+                    'title'=> "Vunglamviec #".$id,
                     'content'=>$this->renderAjax('view', [
                         'model' => $this->findModel($id),
                     ]),
-                    'footer'=> Html::button('Đóng',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                            Html::a('Cập nhật',['update','id'=>$id],['class'=>'btn btn-primary','role'=>'modal-remote'])
+                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                            Html::a('Edit',['update','id'=>$id],['class'=>'btn btn-primary','role'=>'modal-remote'])
                 ];    
         }else{
             return $this->render('view', [
@@ -74,7 +74,7 @@ class HangmucController extends Controller
     }
 
     /**
-     * Creates a new Hangmuc model.
+     * Creates a new Vunglamviec model.
      * For ajax request will return json object
      * and for non-ajax request if creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
@@ -82,7 +82,7 @@ class HangmucController extends Controller
     public function actionCreate()
     {
         $request = Yii::$app->request;
-        $model = new Hangmuc();  
+        $model = new Vunglamviec();  
 
         if($request->isAjax){
             /*
@@ -91,31 +91,31 @@ class HangmucController extends Controller
             Yii::$app->response->format = Response::FORMAT_JSON;
             if($request->isGet){
                 return [
-                    'title'=> "Create new Hangmuc",
+                    'title'=> "Create new Vunglamviec",
                     'content'=>$this->renderAjax('create', [
                         'model' => $model,
                     ]),
-                    'footer'=> Html::button('Đóng',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                                Html::button('Lưu lại',['class'=>'btn btn-primary','type'=>"submit"])
+                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                                Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
         
                 ];         
             }else if($model->load($request->post()) && $model->save()){
                 return [
                     'forceReload'=>'#crud-datatable-pjax',
-                    'title'=> "Thêm mới hạng mục",
-                    'content'=>'<span class="text-success">Thêm mới hạng mục thành công</span>',
-                    'footer'=> Html::button('Đóng',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                            Html::a('Tiếp tục thêm mới',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
+                    'title'=> "Create new Vunglamviec",
+                    'content'=>'<span class="text-success">Create Vunglamviec success</span>',
+                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                            Html::a('Create More',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
         
                 ];         
             }else{           
                 return [
-                    'title'=> "Thêm mới hạng mục",
+                    'title'=> "Create new Vunglamviec",
                     'content'=>$this->renderAjax('create', [
                         'model' => $model,
                     ]),
-                    'footer'=> Html::button('Đóng',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                                Html::button('Lưu lại',['class'=>'btn btn-primary','type'=>"submit"])
+                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                                Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
         
                 ];         
             }
@@ -135,7 +135,7 @@ class HangmucController extends Controller
     }
 
     /**
-     * Updates an existing Hangmuc model.
+     * Updates an existing Vunglamviec model.
      * For ajax request will return json object
      * and for non-ajax request if update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
@@ -153,31 +153,31 @@ class HangmucController extends Controller
             Yii::$app->response->format = Response::FORMAT_JSON;
             if($request->isGet){
                 return [
-                    'title'=> "Cập nhật hạng mục #".$id,
+                    'title'=> "Update Vunglamviec #".$id,
                     'content'=>$this->renderAjax('update', [
                         'model' => $model,
                     ]),
-                    'footer'=> Html::button('Đóng',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                                Html::button('Lưu lại',['class'=>'btn btn-primary','type'=>"submit"])
+                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                                Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
                 ];         
             }else if($model->load($request->post()) && $model->save()){
                 return [
                     'forceReload'=>'#crud-datatable-pjax',
-                    'title'=> "Hạng mục #".$id,
+                    'title'=> "Vunglamviec #".$id,
                     'content'=>$this->renderAjax('view', [
                         'model' => $model,
                     ]),
-                    'footer'=> Html::button('Đóng',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                            Html::a('Cập nhật',['update','id'=>$id],['class'=>'btn btn-primary','role'=>'modal-remote'])
+                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                            Html::a('Edit',['update','id'=>$id],['class'=>'btn btn-primary','role'=>'modal-remote'])
                 ];    
             }else{
                  return [
-                    'title'=> "Cập nhật hạng mục #".$id,
+                    'title'=> "Update Vunglamviec #".$id,
                     'content'=>$this->renderAjax('update', [
                         'model' => $model,
                     ]),
-                    'footer'=> Html::button('Đóng',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                                Html::button('Lưu lại',['class'=>'btn btn-primary','type'=>"submit"])
+                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                                Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
                 ];        
             }
         }else{
@@ -195,7 +195,7 @@ class HangmucController extends Controller
     }
 
     /**
-     * Delete an existing Hangmuc model.
+     * Delete an existing Vunglamviec model.
      * For ajax request will return json object
      * and for non-ajax request if deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
@@ -223,7 +223,7 @@ class HangmucController extends Controller
     }
 
      /**
-     * Delete multiple existing Hangmuc model.
+     * Delete multiple existing Vunglamviec model.
      * For ajax request will return json object
      * and for non-ajax request if deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
@@ -254,15 +254,15 @@ class HangmucController extends Controller
     }
 
     /**
-     * Finds the Hangmuc model based on its primary key value.
+     * Finds the Vunglamviec model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Hangmuc the loaded model
+     * @return Vunglamviec the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Hangmuc::findOne($id)) !== null) {
+        if (($model = Vunglamviec::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

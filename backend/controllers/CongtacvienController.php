@@ -3,8 +3,8 @@
 namespace backend\controllers;
 
 use Yii;
-use backend\models\Xuatxu;
-use backend\models\search\XuatxuSearch;
+use backend\models\Congtacvien;
+use backend\models\search\CongtacvienSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -12,9 +12,9 @@ use \yii\web\Response;
 use yii\helpers\Html;
 
 /**
- * XuatxuController implements the CRUD actions for Xuatxu model.
+ * CongtacvienController implements the CRUD actions for Congtacvien model.
  */
-class XuatxuController extends Controller
+class CongtacvienController extends Controller
 {
     /**
      * @inheritdoc
@@ -33,12 +33,12 @@ class XuatxuController extends Controller
     }
 
     /**
-     * Lists all Xuatxu models.
+     * Lists all Congtacvien models.
      * @return mixed
      */
     public function actionIndex()
     {    
-        $searchModel = new XuatxuSearch();
+        $searchModel = new CongtacvienSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -49,7 +49,7 @@ class XuatxuController extends Controller
 
 
     /**
-     * Displays a single Xuatxu model.
+     * Displays a single Congtacvien model.
      * @param integer $id
      * @return mixed
      */
@@ -59,12 +59,12 @@ class XuatxuController extends Controller
         if($request->isAjax){
             Yii::$app->response->format = Response::FORMAT_JSON;
             return [
-                    'title'=> "Xuất xứ #".$id,
+                    'title'=> "Congtacvien #".$id,
                     'content'=>$this->renderAjax('view', [
                         'model' => $this->findModel($id),
                     ]),
-                    'footer'=> Html::button('Đóng',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                            Html::a('Cập nhật',['update','id'=>$id],['class'=>'btn btn-primary','role'=>'modal-remote'])
+                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                            Html::a('Edit',['update','id'=>$id],['class'=>'btn btn-primary','role'=>'modal-remote'])
                 ];    
         }else{
             return $this->render('view', [
@@ -74,7 +74,7 @@ class XuatxuController extends Controller
     }
 
     /**
-     * Creates a new Xuatxu model.
+     * Creates a new Congtacvien model.
      * For ajax request will return json object
      * and for non-ajax request if creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
@@ -82,7 +82,7 @@ class XuatxuController extends Controller
     public function actionCreate()
     {
         $request = Yii::$app->request;
-        $model = new Xuatxu();  
+        $model = new Congtacvien();  
 
         if($request->isAjax){
             /*
@@ -91,31 +91,31 @@ class XuatxuController extends Controller
             Yii::$app->response->format = Response::FORMAT_JSON;
             if($request->isGet){
                 return [
-                    'title'=> "Thêm mới xuất xứ",
+                    'title'=> "Create new Congtacvien",
                     'content'=>$this->renderAjax('create', [
                         'model' => $model,
                     ]),
-                    'footer'=> Html::button('Đóng',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                                Html::button('Lưu lại',['class'=>'btn btn-primary','type'=>"submit"])
+                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                                Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
         
                 ];         
             }else if($model->load($request->post()) && $model->save()){
                 return [
                     'forceReload'=>'#crud-datatable-pjax',
-                    'title'=> "Thêm mới xuất xứ",
-                    'content'=>'<span class="text-success">Thêm mới nơi xuất xứ thành công</span>',
-                    'footer'=> Html::button('Đóng',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                            Html::a('Tiếp tục thêm mới',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
+                    'title'=> "Create new Congtacvien",
+                    'content'=>'<span class="text-success">Create Congtacvien success</span>',
+                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                            Html::a('Create More',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
         
                 ];         
             }else{           
                 return [
-                    'title'=> "Thêm mới xuất xứ",
+                    'title'=> "Create new Congtacvien",
                     'content'=>$this->renderAjax('create', [
                         'model' => $model,
                     ]),
-                    'footer'=> Html::button('Đóng',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                                Html::button('Lưu lại',['class'=>'btn btn-primary','type'=>"submit"])
+                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                                Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
         
                 ];         
             }
@@ -135,7 +135,7 @@ class XuatxuController extends Controller
     }
 
     /**
-     * Updates an existing Xuatxu model.
+     * Updates an existing Congtacvien model.
      * For ajax request will return json object
      * and for non-ajax request if update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
@@ -153,31 +153,31 @@ class XuatxuController extends Controller
             Yii::$app->response->format = Response::FORMAT_JSON;
             if($request->isGet){
                 return [
-                    'title'=> "Cập nhật xuất xứ #".$id,
+                    'title'=> "Update Congtacvien #".$id,
                     'content'=>$this->renderAjax('update', [
                         'model' => $model,
                     ]),
-                    'footer'=> Html::button('Đóng',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                                Html::button('Lưu lại',['class'=>'btn btn-primary','type'=>"submit"])
+                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                                Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
                 ];         
             }else if($model->load($request->post()) && $model->save()){
                 return [
                     'forceReload'=>'#crud-datatable-pjax',
-                    'title'=> "Xuất xứ #".$id,
+                    'title'=> "Congtacvien #".$id,
                     'content'=>$this->renderAjax('view', [
                         'model' => $model,
                     ]),
-                    'footer'=> Html::button('Đóng',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                            Html::a('Cập nhật',['update','id'=>$id],['class'=>'btn btn-primary','role'=>'modal-remote'])
+                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                            Html::a('Edit',['update','id'=>$id],['class'=>'btn btn-primary','role'=>'modal-remote'])
                 ];    
             }else{
                  return [
-                    'title'=> "Cập nhật xuất xứ #".$id,
+                    'title'=> "Update Congtacvien #".$id,
                     'content'=>$this->renderAjax('update', [
                         'model' => $model,
                     ]),
-                    'footer'=> Html::button('Đóng',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                                Html::button('Lưu lại',['class'=>'btn btn-primary','type'=>"submit"])
+                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                                Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
                 ];        
             }
         }else{
@@ -195,7 +195,7 @@ class XuatxuController extends Controller
     }
 
     /**
-     * Delete an existing Xuatxu model.
+     * Delete an existing Congtacvien model.
      * For ajax request will return json object
      * and for non-ajax request if deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
@@ -223,7 +223,7 @@ class XuatxuController extends Controller
     }
 
      /**
-     * Delete multiple existing Xuatxu model.
+     * Delete multiple existing Congtacvien model.
      * For ajax request will return json object
      * and for non-ajax request if deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
@@ -254,15 +254,15 @@ class XuatxuController extends Controller
     }
 
     /**
-     * Finds the Xuatxu model based on its primary key value.
+     * Finds the Congtacvien model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Xuatxu the loaded model
+     * @return Congtacvien the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Xuatxu::findOne($id)) !== null) {
+        if (($model = Congtacvien::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

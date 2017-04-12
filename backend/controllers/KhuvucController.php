@@ -3,8 +3,8 @@
 namespace backend\controllers;
 
 use Yii;
-use backend\models\Kho;
-use backend\models\search\KhoSearch;
+use backend\models\Khuvuc;
+use backend\models\search\KhuvucSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -12,9 +12,9 @@ use \yii\web\Response;
 use yii\helpers\Html;
 
 /**
- * KhoController implements the CRUD actions for Kho model.
+ * KhuvucController implements the CRUD actions for Khuvuc model.
  */
-class KhoController extends Controller
+class KhuvucController extends Controller
 {
     /**
      * @inheritdoc
@@ -33,12 +33,12 @@ class KhoController extends Controller
     }
 
     /**
-     * Lists all Kho models.
+     * Lists all Khuvuc models.
      * @return mixed
      */
     public function actionIndex()
     {    
-        $searchModel = new KhoSearch();
+        $searchModel = new KhuvucSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -49,7 +49,7 @@ class KhoController extends Controller
 
 
     /**
-     * Displays a single Kho model.
+     * Displays a single Khuvuc model.
      * @param integer $id
      * @return mixed
      */
@@ -59,7 +59,7 @@ class KhoController extends Controller
         if($request->isAjax){
             Yii::$app->response->format = Response::FORMAT_JSON;
             return [
-                    'title'=> "Kho #".$id,
+                    'title'=> "Khuvuc #".$id,
                     'content'=>$this->renderAjax('view', [
                         'model' => $this->findModel($id),
                     ]),
@@ -74,7 +74,7 @@ class KhoController extends Controller
     }
 
     /**
-     * Creates a new Kho model.
+     * Creates a new Khuvuc model.
      * For ajax request will return json object
      * and for non-ajax request if creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
@@ -82,7 +82,7 @@ class KhoController extends Controller
     public function actionCreate()
     {
         $request = Yii::$app->request;
-        $model = new Kho();  
+        $model = new Khuvuc();  
 
         if($request->isAjax){
             /*
@@ -91,7 +91,7 @@ class KhoController extends Controller
             Yii::$app->response->format = Response::FORMAT_JSON;
             if($request->isGet){
                 return [
-                    'title'=> "Create new Kho",
+                    'title'=> "Create new Khuvuc",
                     'content'=>$this->renderAjax('create', [
                         'model' => $model,
                     ]),
@@ -102,15 +102,15 @@ class KhoController extends Controller
             }else if($model->load($request->post()) && $model->save()){
                 return [
                     'forceReload'=>'#crud-datatable-pjax',
-                    'title'=> "Create new Kho",
-                    'content'=>'<span class="text-success">Create Kho success</span>',
+                    'title'=> "Create new Khuvuc",
+                    'content'=>'<span class="text-success">Create Khuvuc success</span>',
                     'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
                             Html::a('Create More',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
         
                 ];         
             }else{           
                 return [
-                    'title'=> "Create new Kho",
+                    'title'=> "Create new Khuvuc",
                     'content'=>$this->renderAjax('create', [
                         'model' => $model,
                     ]),
@@ -135,7 +135,7 @@ class KhoController extends Controller
     }
 
     /**
-     * Updates an existing Kho model.
+     * Updates an existing Khuvuc model.
      * For ajax request will return json object
      * and for non-ajax request if update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
@@ -153,7 +153,7 @@ class KhoController extends Controller
             Yii::$app->response->format = Response::FORMAT_JSON;
             if($request->isGet){
                 return [
-                    'title'=> "Update Kho #".$id,
+                    'title'=> "Update Khuvuc #".$id,
                     'content'=>$this->renderAjax('update', [
                         'model' => $model,
                     ]),
@@ -163,7 +163,7 @@ class KhoController extends Controller
             }else if($model->load($request->post()) && $model->save()){
                 return [
                     'forceReload'=>'#crud-datatable-pjax',
-                    'title'=> "Kho #".$id,
+                    'title'=> "Khuvuc #".$id,
                     'content'=>$this->renderAjax('view', [
                         'model' => $model,
                     ]),
@@ -172,7 +172,7 @@ class KhoController extends Controller
                 ];    
             }else{
                  return [
-                    'title'=> "Update Kho #".$id,
+                    'title'=> "Update Khuvuc #".$id,
                     'content'=>$this->renderAjax('update', [
                         'model' => $model,
                     ]),
@@ -195,7 +195,7 @@ class KhoController extends Controller
     }
 
     /**
-     * Delete an existing Kho model.
+     * Delete an existing Khuvuc model.
      * For ajax request will return json object
      * and for non-ajax request if deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
@@ -223,7 +223,7 @@ class KhoController extends Controller
     }
 
      /**
-     * Delete multiple existing Kho model.
+     * Delete multiple existing Khuvuc model.
      * For ajax request will return json object
      * and for non-ajax request if deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
@@ -254,15 +254,15 @@ class KhoController extends Controller
     }
 
     /**
-     * Finds the Kho model based on its primary key value.
+     * Finds the Khuvuc model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Kho the loaded model
+     * @return Khuvuc the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Kho::findOne($id)) !== null) {
+        if (($model = Khuvuc::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

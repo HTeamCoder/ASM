@@ -2,9 +2,9 @@
 
 namespace backend\controllers;
 
-use backend\models\Nhacungcapkhachhang;
-use backend\models\search\NhacungcapkhachhangSearch;
 use Yii;
+use backend\models\Noidaotaosautrungtuyen;
+use backend\models\search\NoidaotaosautrungtuyenSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -12,9 +12,9 @@ use \yii\web\Response;
 use yii\helpers\Html;
 
 /**
- * NhacungcapkhachhangController implements the CRUD actions for Nhacungcapkhachhang model.
+ * NoidaotaosautrungtuyenController implements the CRUD actions for Noidaotaosautrungtuyen model.
  */
-class KhachhangController extends Controller
+class NoidaotaosautrungtuyenController extends Controller
 {
     /**
      * @inheritdoc
@@ -33,13 +33,13 @@ class KhachhangController extends Controller
     }
 
     /**
-     * Lists all Nhacungcapkhachhang models.
+     * Lists all Noidaotaosautrungtuyen models.
      * @return mixed
      */
     public function actionIndex()
     {    
-        $searchModel = new NhacungcapkhachhangSearch();
-        $dataProvider = $searchModel->searchKhachhang(Yii::$app->request->queryParams);
+        $searchModel = new NoidaotaosautrungtuyenSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -49,8 +49,8 @@ class KhachhangController extends Controller
 
 
     /**
-     * Displays a single Nhacungcapkhachhang model.
-     * @param integer $id
+     * Displays a single Noidaotaosautrungtuyen model.
+     * @param string $id
      * @return mixed
      */
     public function actionView($id)
@@ -59,12 +59,12 @@ class KhachhangController extends Controller
         if($request->isAjax){
             Yii::$app->response->format = Response::FORMAT_JSON;
             return [
-                    'title'=> "Khách hàng #".$id,
+                    'title'=> "Noidaotaosautrungtuyen #".$id,
                     'content'=>$this->renderAjax('view', [
                         'model' => $this->findModel($id),
                     ]),
-                    'footer'=> Html::button('Đóng',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                            Html::a('Lưu lại',['update','id'=>$id],['class'=>'btn btn-primary','role'=>'modal-remote'])
+                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                            Html::a('Edit',['update','id'=>$id],['class'=>'btn btn-primary','role'=>'modal-remote'])
                 ];    
         }else{
             return $this->render('view', [
@@ -74,7 +74,7 @@ class KhachhangController extends Controller
     }
 
     /**
-     * Creates a new Nhacungcapkhachhang model.
+     * Creates a new Noidaotaosautrungtuyen model.
      * For ajax request will return json object
      * and for non-ajax request if creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
@@ -82,7 +82,7 @@ class KhachhangController extends Controller
     public function actionCreate()
     {
         $request = Yii::$app->request;
-        $model = new Nhacungcapkhachhang();  
+        $model = new Noidaotaosautrungtuyen();  
 
         if($request->isAjax){
             /*
@@ -91,31 +91,31 @@ class KhachhangController extends Controller
             Yii::$app->response->format = Response::FORMAT_JSON;
             if($request->isGet){
                 return [
-                    'title'=> "Thêm mới khách hàng",
+                    'title'=> "Create new Noidaotaosautrungtuyen",
                     'content'=>$this->renderAjax('create', [
                         'model' => $model,
                     ]),
-                    'footer'=> Html::button('Đóng',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                                Html::button('Lưu lại',['class'=>'btn btn-primary','type'=>"submit"])
+                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                                Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
         
                 ];         
             }else if($model->load($request->post()) && $model->save()){
                 return [
                     'forceReload'=>'#crud-datatable-pjax',
-                    'title'=> "Thêm mới khách hàng",
-                    'content'=>'<span class="text-success">Thêm mới khách hàng thành công</span>',
-                    'footer'=> Html::button('Đóng',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                            Html::a('Tiếp tục thêm mới',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
+                    'title'=> "Create new Noidaotaosautrungtuyen",
+                    'content'=>'<span class="text-success">Create Noidaotaosautrungtuyen success</span>',
+                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                            Html::a('Create More',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
         
                 ];         
             }else{           
                 return [
-                    'title'=> "Thêm mới khách hàng",
+                    'title'=> "Create new Noidaotaosautrungtuyen",
                     'content'=>$this->renderAjax('create', [
                         'model' => $model,
                     ]),
-                    'footer'=> Html::button('Đóng',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                                Html::button('Lưu lại',['class'=>'btn btn-primary','type'=>"submit"])
+                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                                Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
         
                 ];         
             }
@@ -135,10 +135,10 @@ class KhachhangController extends Controller
     }
 
     /**
-     * Updates an existing Nhacungcapkhachhang model.
+     * Updates an existing Noidaotaosautrungtuyen model.
      * For ajax request will return json object
      * and for non-ajax request if update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
+     * @param string $id
      * @return mixed
      */
     public function actionUpdate($id)
@@ -153,31 +153,31 @@ class KhachhangController extends Controller
             Yii::$app->response->format = Response::FORMAT_JSON;
             if($request->isGet){
                 return [
-                    'title'=> "Cập nhật khách hàng #".$id,
+                    'title'=> "Update Noidaotaosautrungtuyen #".$id,
                     'content'=>$this->renderAjax('update', [
                         'model' => $model,
                     ]),
-                    'footer'=> Html::button('Đóng',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                                Html::button('Lưu lại',['class'=>'btn btn-primary','type'=>"submit"])
+                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                                Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
                 ];         
             }else if($model->load($request->post()) && $model->save()){
                 return [
                     'forceReload'=>'#crud-datatable-pjax',
-                    'title'=> "Khách hàng #".$id,
+                    'title'=> "Noidaotaosautrungtuyen #".$id,
                     'content'=>$this->renderAjax('view', [
                         'model' => $model,
                     ]),
-                    'footer'=> Html::button('Đóng',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                            Html::a('Lưu lại',['update','id'=>$id],['class'=>'btn btn-primary','role'=>'modal-remote'])
+                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                            Html::a('Edit',['update','id'=>$id],['class'=>'btn btn-primary','role'=>'modal-remote'])
                 ];    
             }else{
                  return [
-                    'title'=> "Cập nhật khách hàng #".$id,
+                    'title'=> "Update Noidaotaosautrungtuyen #".$id,
                     'content'=>$this->renderAjax('update', [
                         'model' => $model,
                     ]),
-                    'footer'=> Html::button('Đóng',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                                Html::button('Lưu lại',['class'=>'btn btn-primary','type'=>"submit"])
+                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                                Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
                 ];        
             }
         }else{
@@ -195,10 +195,10 @@ class KhachhangController extends Controller
     }
 
     /**
-     * Delete an existing Nhacungcapkhachhang model.
+     * Delete an existing Noidaotaosautrungtuyen model.
      * For ajax request will return json object
      * and for non-ajax request if deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
+     * @param string $id
      * @return mixed
      */
     public function actionDelete($id)
@@ -223,10 +223,10 @@ class KhachhangController extends Controller
     }
 
      /**
-     * Delete multiple existing Nhacungcapkhachhang model.
+     * Delete multiple existing Noidaotaosautrungtuyen model.
      * For ajax request will return json object
      * and for non-ajax request if deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
+     * @param string $id
      * @return mixed
      */
     public function actionBulkDelete()
@@ -254,15 +254,15 @@ class KhachhangController extends Controller
     }
 
     /**
-     * Finds the Nhacungcapkhachhang model based on its primary key value.
+     * Finds the Noidaotaosautrungtuyen model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return Nhacungcapkhachhang the loaded model
+     * @param string $id
+     * @return Noidaotaosautrungtuyen the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Nhacungcapkhachhang::findOne($id)) !== null) {
+        if (($model = Noidaotaosautrungtuyen::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

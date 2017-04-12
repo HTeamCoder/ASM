@@ -2,11 +2,9 @@
 
 namespace backend\controllers;
 
-use backend\models\search\NhacungcapkhachhangSearch;
 use Yii;
-use backend\models\Nhacungcapkhachhang;
-use backend\models\searchNhacungcapkhachhangSearch;
-use yii\helpers\Json;
+use backend\models\Benhvien;
+use backend\models\search\BenhvienSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -14,9 +12,9 @@ use \yii\web\Response;
 use yii\helpers\Html;
 
 /**
- * NhacungcapkhachhangController implements the CRUD actions for Nhacungcapkhachhang model.
+ * BenhvienController implements the CRUD actions for Benhvien model.
  */
-class NhacungcapkhachhangController extends Controller
+class BenhvienController extends Controller
 {
     /**
      * @inheritdoc
@@ -35,12 +33,12 @@ class NhacungcapkhachhangController extends Controller
     }
 
     /**
-     * Lists all Nhacungcapkhachhang models.
+     * Lists all Benhvien models.
      * @return mixed
      */
     public function actionIndex()
     {    
-        $searchModel = new NhacungcapkhachhangSearch();
+        $searchModel = new BenhvienSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -51,7 +49,7 @@ class NhacungcapkhachhangController extends Controller
 
 
     /**
-     * Displays a single Nhacungcapkhachhang model.
+     * Displays a single Benhvien model.
      * @param integer $id
      * @return mixed
      */
@@ -61,7 +59,7 @@ class NhacungcapkhachhangController extends Controller
         if($request->isAjax){
             Yii::$app->response->format = Response::FORMAT_JSON;
             return [
-                    'title'=> "Nhacungcapkhachhang #".$id,
+                    'title'=> "Benhvien #".$id,
                     'content'=>$this->renderAjax('view', [
                         'model' => $this->findModel($id),
                     ]),
@@ -76,7 +74,7 @@ class NhacungcapkhachhangController extends Controller
     }
 
     /**
-     * Creates a new Nhacungcapkhachhang model.
+     * Creates a new Benhvien model.
      * For ajax request will return json object
      * and for non-ajax request if creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
@@ -84,7 +82,7 @@ class NhacungcapkhachhangController extends Controller
     public function actionCreate()
     {
         $request = Yii::$app->request;
-        $model = new Nhacungcapkhachhang();  
+        $model = new Benhvien();  
 
         if($request->isAjax){
             /*
@@ -93,7 +91,7 @@ class NhacungcapkhachhangController extends Controller
             Yii::$app->response->format = Response::FORMAT_JSON;
             if($request->isGet){
                 return [
-                    'title'=> "Create new Nhacungcapkhachhang",
+                    'title'=> "Create new Benhvien",
                     'content'=>$this->renderAjax('create', [
                         'model' => $model,
                     ]),
@@ -104,15 +102,15 @@ class NhacungcapkhachhangController extends Controller
             }else if($model->load($request->post()) && $model->save()){
                 return [
                     'forceReload'=>'#crud-datatable-pjax',
-                    'title'=> "Create new Nhacungcapkhachhang",
-                    'content'=>'<span class="text-success">Create Nhacungcapkhachhang success</span>',
+                    'title'=> "Create new Benhvien",
+                    'content'=>'<span class="text-success">Create Benhvien success</span>',
                     'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
                             Html::a('Create More',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
         
                 ];         
             }else{           
                 return [
-                    'title'=> "Create new Nhacungcapkhachhang",
+                    'title'=> "Create new Benhvien",
                     'content'=>$this->renderAjax('create', [
                         'model' => $model,
                     ]),
@@ -137,7 +135,7 @@ class NhacungcapkhachhangController extends Controller
     }
 
     /**
-     * Updates an existing Nhacungcapkhachhang model.
+     * Updates an existing Benhvien model.
      * For ajax request will return json object
      * and for non-ajax request if update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
@@ -155,7 +153,7 @@ class NhacungcapkhachhangController extends Controller
             Yii::$app->response->format = Response::FORMAT_JSON;
             if($request->isGet){
                 return [
-                    'title'=> "Update Nhacungcapkhachhang #".$id,
+                    'title'=> "Update Benhvien #".$id,
                     'content'=>$this->renderAjax('update', [
                         'model' => $model,
                     ]),
@@ -165,7 +163,7 @@ class NhacungcapkhachhangController extends Controller
             }else if($model->load($request->post()) && $model->save()){
                 return [
                     'forceReload'=>'#crud-datatable-pjax',
-                    'title'=> "Nhacungcapkhachhang #".$id,
+                    'title'=> "Benhvien #".$id,
                     'content'=>$this->renderAjax('view', [
                         'model' => $model,
                     ]),
@@ -174,7 +172,7 @@ class NhacungcapkhachhangController extends Controller
                 ];    
             }else{
                  return [
-                    'title'=> "Update Nhacungcapkhachhang #".$id,
+                    'title'=> "Update Benhvien #".$id,
                     'content'=>$this->renderAjax('update', [
                         'model' => $model,
                     ]),
@@ -197,7 +195,7 @@ class NhacungcapkhachhangController extends Controller
     }
 
     /**
-     * Delete an existing Nhacungcapkhachhang model.
+     * Delete an existing Benhvien model.
      * For ajax request will return json object
      * and for non-ajax request if deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
@@ -225,7 +223,7 @@ class NhacungcapkhachhangController extends Controller
     }
 
      /**
-     * Delete multiple existing Nhacungcapkhachhang model.
+     * Delete multiple existing Benhvien model.
      * For ajax request will return json object
      * and for non-ajax request if deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
@@ -256,33 +254,18 @@ class NhacungcapkhachhangController extends Controller
     }
 
     /**
-     * Finds the Nhacungcapkhachhang model based on its primary key value.
+     * Finds the Benhvien model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Nhacungcapkhachhang the loaded model
+     * @return Benhvien the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Nhacungcapkhachhang::findOne($id)) !== null) {
+        if (($model = Benhvien::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
-        }
-    }
-
-    public function actionGetinfo(){
-        if(isset($_POST['type']) && isset($_POST['dienthoai'])){
-            $type = $_POST['type'];
-            $dt = $_POST['dienthoai'];
-            echo Json::encode(Nhacungcapkhachhang::find()->where('type = :t and (dienthoai = :d or name = :d)',[':t' => $type, ':d' => $dt])->one());
-        }
-    }
-    public function actionGetnhacungcapkhachhanginfo(){
-        if(isset($_POST['type']) && isset($_POST['dienthoai'])){
-            $type = $_POST['type'];
-            $dt = $_POST['dienthoai'];
-            echo Json::encode(Nhacungcapkhachhang::find()->where('dienthoai = :d or name = :d',[':d' => $dt])->one());
         }
     }
 }

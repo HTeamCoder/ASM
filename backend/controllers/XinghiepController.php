@@ -2,9 +2,9 @@
 
 namespace backend\controllers;
 
-use backend\models\Nhacungcapkhachhang;
-use backend\models\search\NhacungcapkhachhangSearch;
 use Yii;
+use backend\models\Xinghiep;
+use backend\models\search\XinghiepSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -12,9 +12,9 @@ use \yii\web\Response;
 use yii\helpers\Html;
 
 /**
- * NhacungcapkhachhangController implements the CRUD actions for Nhacungcapkhachhang model.
+ * XinghiepController implements the CRUD actions for Xinghiep model.
  */
-class NhacungcapController extends Controller
+class XinghiepController extends Controller
 {
     /**
      * @inheritdoc
@@ -33,13 +33,13 @@ class NhacungcapController extends Controller
     }
 
     /**
-     * Lists all Nhacungcapkhachhang models.
+     * Lists all Xinghiep models.
      * @return mixed
      */
     public function actionIndex()
     {    
-        $searchModel = new NhacungcapkhachhangSearch();
-        $dataProvider = $searchModel->searchNCC(Yii::$app->request->queryParams);
+        $searchModel = new XinghiepSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -49,7 +49,7 @@ class NhacungcapController extends Controller
 
 
     /**
-     * Displays a single Nhacungcapkhachhang model.
+     * Displays a single Xinghiep model.
      * @param integer $id
      * @return mixed
      */
@@ -59,12 +59,12 @@ class NhacungcapController extends Controller
         if($request->isAjax){
             Yii::$app->response->format = Response::FORMAT_JSON;
             return [
-                    'title'=> "Nhà cung cấp #".$id,
+                    'title'=> "Xinghiep #".$id,
                     'content'=>$this->renderAjax('view', [
                         'model' => $this->findModel($id),
                     ]),
-                    'footer'=> Html::button('Đóng',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                            Html::a('Cập nhật',['update','id'=>$id],['class'=>'btn btn-primary','role'=>'modal-remote'])
+                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                            Html::a('Edit',['update','id'=>$id],['class'=>'btn btn-primary','role'=>'modal-remote'])
                 ];    
         }else{
             return $this->render('view', [
@@ -74,7 +74,7 @@ class NhacungcapController extends Controller
     }
 
     /**
-     * Creates a new Nhacungcapkhachhang model.
+     * Creates a new Xinghiep model.
      * For ajax request will return json object
      * and for non-ajax request if creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
@@ -82,7 +82,7 @@ class NhacungcapController extends Controller
     public function actionCreate()
     {
         $request = Yii::$app->request;
-        $model = new Nhacungcapkhachhang();  
+        $model = new Xinghiep();  
 
         if($request->isAjax){
             /*
@@ -91,31 +91,31 @@ class NhacungcapController extends Controller
             Yii::$app->response->format = Response::FORMAT_JSON;
             if($request->isGet){
                 return [
-                    'title'=> "Thêm nhà cung cấp",
+                    'title'=> "Create new Xinghiep",
                     'content'=>$this->renderAjax('create', [
                         'model' => $model,
                     ]),
-                    'footer'=> Html::button('Đóng',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                                Html::button('Lưu lại',['class'=>'btn btn-primary','type'=>"submit"])
+                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                                Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
         
                 ];         
             }else if($model->load($request->post()) && $model->save()){
                 return [
                     'forceReload'=>'#crud-datatable-pjax',
-                    'title'=> "Thêm mới nhà cung cấp",
-                    'content'=>'<span class="text-success">Đã thêm thành công NCC '.$model->name.'</span>',
-                    'footer'=> Html::button('Đóng',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                            Html::a('Tiếp tục thêm mới',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
+                    'title'=> "Create new Xinghiep",
+                    'content'=>'<span class="text-success">Create Xinghiep success</span>',
+                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                            Html::a('Create More',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
         
                 ];         
             }else{           
                 return [
-                    'title'=> "Thêm mới nhà cung cấp",
+                    'title'=> "Create new Xinghiep",
                     'content'=>$this->renderAjax('create', [
                         'model' => $model,
                     ]),
-                    'footer'=> Html::button('Đóng',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                                Html::button('Lưu lại',['class'=>'btn btn-primary','type'=>"submit"])
+                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                                Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
         
                 ];         
             }
@@ -135,7 +135,7 @@ class NhacungcapController extends Controller
     }
 
     /**
-     * Updates an existing Nhacungcapkhachhang model.
+     * Updates an existing Xinghiep model.
      * For ajax request will return json object
      * and for non-ajax request if update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
@@ -153,31 +153,31 @@ class NhacungcapController extends Controller
             Yii::$app->response->format = Response::FORMAT_JSON;
             if($request->isGet){
                 return [
-                    'title'=> "Cập nhật nhà cung cấp #".$id,
+                    'title'=> "Update Xinghiep #".$id,
                     'content'=>$this->renderAjax('update', [
                         'model' => $model,
                     ]),
-                    'footer'=> Html::button('Đóng',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                                Html::button('Lưu lại',['class'=>'btn btn-primary','type'=>"submit"])
+                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                                Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
                 ];         
             }else if($model->load($request->post()) && $model->save()){
                 return [
                     'forceReload'=>'#crud-datatable-pjax',
-                    'title'=> "Nhà cung cấp #".$id,
+                    'title'=> "Xinghiep #".$id,
                     'content'=>$this->renderAjax('view', [
                         'model' => $model,
                     ]),
-                    'footer'=> Html::button('Đóng',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                            Html::a('Cập nhật',['update','id'=>$id],['class'=>'btn btn-primary','role'=>'modal-remote'])
+                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                            Html::a('Edit',['update','id'=>$id],['class'=>'btn btn-primary','role'=>'modal-remote'])
                 ];    
             }else{
                  return [
-                    'title'=> "Cập nhật nhà cung cấp #".$id,
+                    'title'=> "Update Xinghiep #".$id,
                     'content'=>$this->renderAjax('update', [
                         'model' => $model,
                     ]),
-                    'footer'=> Html::button('Đóng',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                                Html::button('Lưu lại',['class'=>'btn btn-primary','type'=>"submit"])
+                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                                Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
                 ];        
             }
         }else{
@@ -195,7 +195,7 @@ class NhacungcapController extends Controller
     }
 
     /**
-     * Delete an existing Nhacungcapkhachhang model.
+     * Delete an existing Xinghiep model.
      * For ajax request will return json object
      * and for non-ajax request if deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
@@ -223,7 +223,7 @@ class NhacungcapController extends Controller
     }
 
      /**
-     * Delete multiple existing Nhacungcapkhachhang model.
+     * Delete multiple existing Xinghiep model.
      * For ajax request will return json object
      * and for non-ajax request if deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
@@ -254,19 +254,18 @@ class NhacungcapController extends Controller
     }
 
     /**
-     * Finds the Nhacungcapkhachhang model based on its primary key value.
+     * Finds the Xinghiep model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Nhacungcapkhachhang the loaded model
+     * @return Xinghiep the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Nhacungcapkhachhang::findOne($id)) !== null) {
+        if (($model = Xinghiep::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
-
 }

@@ -3,9 +3,8 @@
 namespace backend\controllers;
 
 use Yii;
-use backend\models\Nhomloaihang;
-use backend\models\search\NhomloaihangSearch;
-use yii\helpers\Json;
+use backend\models\Khoa;
+use backend\models\KhoaSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -13,9 +12,9 @@ use \yii\web\Response;
 use yii\helpers\Html;
 
 /**
- * NhomloaihangController implements the CRUD actions for Nhomloaihang model.
+ * KhoaController implements the CRUD actions for Khoa model.
  */
-class NhomloaihangController extends Controller
+class KhoaController extends Controller
 {
     /**
      * @inheritdoc
@@ -34,12 +33,12 @@ class NhomloaihangController extends Controller
     }
 
     /**
-     * Lists all Nhomloaihang models.
+     * Lists all Khoa models.
      * @return mixed
      */
     public function actionIndex()
     {    
-        $searchModel = new NhomloaihangSearch();
+        $searchModel = new KhoaSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -50,7 +49,7 @@ class NhomloaihangController extends Controller
 
 
     /**
-     * Displays a single Nhomloaihang model.
+     * Displays a single Khoa model.
      * @param integer $id
      * @return mixed
      */
@@ -60,12 +59,12 @@ class NhomloaihangController extends Controller
         if($request->isAjax){
             Yii::$app->response->format = Response::FORMAT_JSON;
             return [
-                    'title'=> "Nhóm loại hàng #".$id,
+                    'title'=> "Khoa #".$id,
                     'content'=>$this->renderAjax('view', [
                         'model' => $this->findModel($id),
                     ]),
-                    'footer'=> Html::button('Đóng',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                            Html::a('Cập nhật',['update','id'=>$id],['class'=>'btn btn-primary','id' => 'btn-save', 'role'=>'modal-remote'])
+                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                            Html::a('Edit',['update','id'=>$id],['class'=>'btn btn-primary','role'=>'modal-remote'])
                 ];    
         }else{
             return $this->render('view', [
@@ -75,7 +74,7 @@ class NhomloaihangController extends Controller
     }
 
     /**
-     * Creates a new Nhomloaihang model.
+     * Creates a new Khoa model.
      * For ajax request will return json object
      * and for non-ajax request if creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
@@ -83,7 +82,7 @@ class NhomloaihangController extends Controller
     public function actionCreate()
     {
         $request = Yii::$app->request;
-        $model = new Nhomloaihang();  
+        $model = new Khoa();  
 
         if($request->isAjax){
             /*
@@ -92,29 +91,31 @@ class NhomloaihangController extends Controller
             Yii::$app->response->format = Response::FORMAT_JSON;
             if($request->isGet){
                 return [
-                    'title'=> "Thêm mới nhóm loại hàng",
+                    'title'=> "Create new Khoa",
                     'content'=>$this->renderAjax('create', [
                         'model' => $model,
                     ]),
-                    'footer'=> Html::button('Đóng',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                                Html::button('Lưu lại',['class'=>'btn btn-primary','id' => 'btn-save', 'type'=>"submit"])
+                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                                Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
+        
                 ];         
             }else if($model->load($request->post()) && $model->save()){
                 return [
                     'forceReload'=>'#crud-datatable-pjax',
-                    'title'=> "Thêm mới nhóm loại hàng",
-                    'content'=>'<span class="text-success">Thêm mới nhóm loại hàng thành công</span>',
-                    'footer'=> Html::button('Đóng',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                            Html::a('Tiếp tục thêm mới',['create'],['class'=>'btn btn-primary','id' => 'btn-save', 'role'=>'modal-remote'])
+                    'title'=> "Create new Khoa",
+                    'content'=>'<span class="text-success">Create Khoa success</span>',
+                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                            Html::a('Create More',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
+        
                 ];         
             }else{           
                 return [
-                    'title'=> "Thêm mới nhóm loại hàng",
+                    'title'=> "Create new Khoa",
                     'content'=>$this->renderAjax('create', [
                         'model' => $model,
                     ]),
-                    'footer'=> Html::button('Đóng',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                                Html::button('Lưu lại',['class'=>'btn btn-primary','id' => 'btn-save', 'type'=>"submit"])
+                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                                Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
         
                 ];         
             }
@@ -134,7 +135,7 @@ class NhomloaihangController extends Controller
     }
 
     /**
-     * Updates an existing Nhomloaihang model.
+     * Updates an existing Khoa model.
      * For ajax request will return json object
      * and for non-ajax request if update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
@@ -152,31 +153,31 @@ class NhomloaihangController extends Controller
             Yii::$app->response->format = Response::FORMAT_JSON;
             if($request->isGet){
                 return [
-                    'title'=> "Cập nhật thông tin nhóm {$model->name}",
+                    'title'=> "Update Khoa #".$id,
                     'content'=>$this->renderAjax('update', [
                         'model' => $model,
                     ]),
-                    'footer'=> Html::button('Đóng',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                                Html::button('Lưu lại',['class'=>'btn btn-primary','id' => 'btn-save', 'type'=>"submit"])
+                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                                Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
                 ];         
             }else if($model->load($request->post()) && $model->save()){
                 return [
                     'forceReload'=>'#crud-datatable-pjax',
-                    'title'=> "Nhóm loại hàng #".$id,
+                    'title'=> "Khoa #".$id,
                     'content'=>$this->renderAjax('view', [
                         'model' => $model,
                     ]),
-                    'footer'=> Html::button('Đóng',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                            Html::a('Cập nhật',['update','id'=>$id],['class'=>'btn btn-primary','id' => 'btn-save', 'role'=>'modal-remote'])
+                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                            Html::a('Edit',['update','id'=>$id],['class'=>'btn btn-primary','role'=>'modal-remote'])
                 ];    
             }else{
                  return [
-                    'title'=> "Cập nhật thông tin nhóm {$model->name}",
+                    'title'=> "Update Khoa #".$id,
                     'content'=>$this->renderAjax('update', [
                         'model' => $model,
                     ]),
-                    'footer'=> Html::button('Đóng',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                                Html::button('Lưu lại',['class'=>'btn btn-primary','id' => 'btn-save', 'type'=>"submit"])
+                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                                Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
                 ];        
             }
         }else{
@@ -194,7 +195,7 @@ class NhomloaihangController extends Controller
     }
 
     /**
-     * Delete an existing Nhomloaihang model.
+     * Delete an existing Khoa model.
      * For ajax request will return json object
      * and for non-ajax request if deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
@@ -222,7 +223,7 @@ class NhomloaihangController extends Controller
     }
 
      /**
-     * Delete multiple existing Nhomloaihang model.
+     * Delete multiple existing Khoa model.
      * For ajax request will return json object
      * and for non-ajax request if deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
@@ -253,35 +254,18 @@ class NhomloaihangController extends Controller
     }
 
     /**
-     * Finds the Nhomloaihang model based on its primary key value.
+     * Finds the Khoa model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Nhomloaihang the loaded model
+     * @return Khoa the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Nhomloaihang::findOne($id)) !== null) {
+        if (($model = Khoa::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
-    }
-
-    public function actionGettree(){
-        $phongbans = Nhomloaihang::find()->where('parent is null')->all();
-        $data = [];
-        /** @var  $phongban Nhomloaihang */
-        foreach ($phongbans as $phongban) {
-            $content = ['text' => $phongban->name, 'icon' => 'fa fa-folder icon-state-success', 'childrend' => []];
-            foreach ($phongban->nhomloaihangs as $phongbancon) {
-                $content['children'][] = [
-                    'text' => $phongbancon->name,
-                    'icon' => 'fa fa-file icon-state-warning'
-                ];
-            }
-            $data[] = $content;
-        }
-        echo Json::encode($data);
     }
 }
