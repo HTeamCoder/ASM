@@ -25,9 +25,51 @@ $role = User::getRole();
                     </a>
                     <ul class="dropdown-menu pull-left">
                         <li class="classic-menu-dropdown">
+                            <?=Html::a('<i class="fa fa-bookmark-o"></i> Loại danh sách', Yii::$app->urlManager->createUrl(['loaidanhsach']))?>
+                        </li>
+                        <li class="classic-menu-dropdown">
+                            <?=Html::a('<i class="fa fa-bookmark-o"></i> Khóa học', Yii::$app->urlManager->createUrl(['khoa']))?>
+                        </li>
+                        <li class="classic-menu-dropdown">
+                            <?=Html::a('<i class="fa fa-bookmark-o"></i> Lớp học', Yii::$app->urlManager->createUrl(['lop']))?>
+                        </li>
+                        <li class="classic-menu-dropdown">
+                            <?=Html::a('<i class="fa fa-bookmark-o"></i> Bài học', Yii::$app->urlManager->createUrl(['baihoc']))?>
+                        </li>
+                        <li class="classic-menu-dropdown">
+                            <?=Html::a('<i class="fa fa-bookmark-o"></i> Khu vực', Yii::$app->urlManager->createUrl(['khuvuc']))?>
+                        </li>
+                        <li class="classic-menu-dropdown">
+                            <?=Html::a('<i class="fa fa-bookmark-o"></i> Bệnh viện', Yii::$app->urlManager->createUrl(['benhvien']))?>
+                        </li>
+                        <li class="classic-menu-dropdown">
+                            <?=Html::a('<i class="fa fa-bookmark-o"></i> Nhóm máu', Yii::$app->urlManager->createUrl(['nhommau']))?>
+                        </li>
+                        <li class="classic-menu-dropdown">
+                            <?=Html::a('<i class="fa fa-bookmark-o"></i> Xí nghiệp', Yii::$app->urlManager->createUrl(['xinghiep']))?>
+                        </li>
+                        <li class="classic-menu-dropdown">
+                            <?=Html::a('<i class="fa fa-bookmark-o"></i> Nghiệp đoàn', Yii::$app->urlManager->createUrl(['nghiepdoan']))?>
+                        </li>
+                        <li class="classic-menu-dropdown">
+                            <?=Html::a('<i class="fa fa-bookmark-o"></i> Cộng tác viên', Yii::$app->urlManager->createUrl(['congtacvien']))?>
+                        </li>
+                        <li class="classic-menu-dropdown">
+                            <?=Html::a('<i class="fa fa-bookmark-o"></i> Đơn vị cung cấp nguồn', Yii::$app->urlManager->createUrl(['donvicungcapnguon']))?>
+                        </li>
+                        <li class="classic-menu-dropdown">
+                            <?=Html::a('<i class="fa fa-bookmark-o"></i> Vùng làm việc', Yii::$app->urlManager->createUrl(['vunglamviec']))?>
+                        </li>
+                        <li class="classic-menu-dropdown">
+                            <?=Html::a('<i class="fa fa-bookmark-o"></i> Nơi đào tạo sau trúng tuyển', Yii::$app->urlManager->createUrl(['noidaotaosautrungtuyen']))?>
+                        </li>
+                        <li class="classic-menu-dropdown">
                             <?=Html::a('<i class="fa fa-bookmark-o"></i> Cấu hình', Yii::$app->urlManager->createUrl(['cauhinh']))?>
                         </li>
                     </ul>
+                </li>
+                <li class="classic-menu-dropdown">
+                    <?=Html::a('<i class="fa fa-bookmark-o"></i> Cấu hình', Yii::$app->urlManager->createUrl(['cauhinh']))?>
                 </li>
             </ul>
         </div>
