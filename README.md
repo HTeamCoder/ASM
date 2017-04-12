@@ -1,2 +1,2 @@
 # ASM
-Quản lý TTS ASM JP
+Quản lý TTS ASM
