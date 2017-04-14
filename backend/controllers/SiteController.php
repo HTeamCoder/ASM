@@ -20,7 +20,7 @@ use common\models\LoginForm;
 use common\models\myFuncs;
 
 /**
- * Site controller aaaaa
+ * Site controller aaa bbb
  */
 class SiteController extends Controller
 {
