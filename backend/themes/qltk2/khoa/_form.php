@@ -13,10 +13,10 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'ngaybatdau')->textInput() ?>
+	<?=\common\models\myFuncs::activeDateField($form, $model, 'ngaybatdau','Ngày bắt đầu')?>
 
-    <?= $form->field($model, 'ngayketthuc')->textInput() ?>
-
+	<?=\common\models\myFuncs::activeDateField($form, $model, 'ngayketthuc','Ngày kết thúc')?>
+   
   
 	<?php if (!Yii::$app->request->isAjax){ ?>
 	  	<div class="form-group">

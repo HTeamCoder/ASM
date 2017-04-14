@@ -22,7 +22,7 @@ return [
     ],
     [
         'class'=>'\kartik\grid\DataColumn',
-        'attribute'=>'khoa_id',
+        'attribute'=>'code',
         'contentOptions' => ['class' => 'text-center','style'=>'width:40%;'],
         'headerOptions' => ['class' => 'text-center','style'=>'width:40%;']
     ],

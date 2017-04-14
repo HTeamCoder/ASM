@@ -18,7 +18,7 @@ class LopSearch extends Lop
     public function rules()
     {
         return [
-            [['id', 'khoa_id'], 'integer'],
+            [['id'], 'integer'],
             [['name', 'code'], 'safe'],
         ];
     }
@@ -57,7 +57,6 @@ class LopSearch extends Lop
 
         $query->andFilterWhere([
             'id' => $this->id,
-            'khoa_id' => $this->khoa_id,
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])
