@@ -21,6 +21,7 @@ use common\models\myFuncs;
 
 /**
  * Site controller aaa bbb
+ * ccccccc
  */
 class SiteController extends Controller
 {
