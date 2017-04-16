@@ -33,10 +33,9 @@ class Donhangchitiet extends \yii\db\ActiveRecord
     {
         return [
             [['ghichu'], 'string'],
-            [['hocvien_id', 'donhang_id'], 'required'],
-            [['hocvien_id', 'donhang_id'], 'integer'],
-            [['hocvien_id'], 'exist', 'skipOnError' => true, 'targetClass' => Hocvien::className(), 'targetAttribute' => ['hocvien_id' => 'id']],
-            [['donhang_id'], 'exist', 'skipOnError' => true, 'targetClass' => Donhang::className(), 'targetAttribute' => ['donhang_id' => 'id']],
+            [['hocvien_id', 'donhang_id'], 'safe'],
+            // [['hocvien_id'], 'exist', 'skipOnError' => true, 'targetClass' => Hocvien::className(), 'targetAttribute' => ['hocvien_id' => 'id']],
+            // [['donhang_id'], 'exist', 'skipOnError' => true, 'targetClass' => Donhang::className(), 'targetAttribute' => ['donhang_id' => 'id']],
         ];
     }
 

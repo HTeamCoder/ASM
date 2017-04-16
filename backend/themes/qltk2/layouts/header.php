@@ -46,6 +46,9 @@ $role = User::getRole();
                             <?=Html::a('<i class="fa fa-bookmark-o"></i> Nhóm máu', Yii::$app->urlManager->createUrl(['nhommau']))?>
                         </li>
                         <li class="classic-menu-dropdown">
+                            <?=Html::a('<i class="fa fa-bookmark-o"></i> Trình độ học vấn', Yii::$app->urlManager->createUrl(['trinhdohocvan']))?>
+                        </li>
+                        <li class="classic-menu-dropdown">
                             <?=Html::a('<i class="fa fa-bookmark-o"></i> Xí nghiệp', Yii::$app->urlManager->createUrl(['xinghiep']))?>
                         </li>
                         <li class="classic-menu-dropdown">
@@ -66,7 +69,17 @@ $role = User::getRole();
                     </ul>
                 </li>
                 <li class="classic-menu-dropdown">
-                    <?=Html::a('<i class="fa fa-bookmark-o"></i> Tuyển dụng', Yii::$app->urlManager->createUrl(['index']))?>
+                     <a data-toggle="dropdown" href="javascript:;" class="dropdown-toggle" data-hover="megamenu-dropdown" data-close-others="true">
+                        Học viên <i class="fa fa-angle-down"></i>
+                    </a>
+                    <ul class="dropdown-menu pull-left">
+                        <li class="classic-menu-dropdown">
+                            <?=Html::a('<i class="fa fa-bookmark-o"></i> Thêm mới học viên', Yii::$app->urlManager->createUrl(['hocvien/themhocvien']))?>
+                        </li>
+                        <li class="classic-menu-dropdown">
+                            <?=Html::a('<i class="fa fa-bookmark-o"></i> Danh sách học viên', Yii::$app->urlManager->createUrl(['hocvien']))?>
+                        </li>
+                    </ul>
                 </li>
                 <li class="classic-menu-dropdown">
                     <?=Html::a('<i class="fa fa-bookmark-o"></i> Đào tạo', Yii::$app->urlManager->createUrl(['index']))?>

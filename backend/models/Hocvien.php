@@ -4,6 +4,7 @@ namespace backend\models;
 
 use Yii;
 use common\models\myFuncs;
+use yii\web\UploadedFile;
 /**
  * This is the model class for table "{{%hocvien}}".
  *
@@ -59,6 +60,7 @@ use common\models\myFuncs;
  */
 class Hocvien extends \yii\db\ActiveRecord
 {
+    public $phuongxa,$quanhuyen,$tinhthanh;
     /**
      * @inheritdoc
      */
@@ -73,24 +75,24 @@ class Hocvien extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['ma', 'name', 'code', 'tentiengnhat', 'gioitinh', 'ngaysinh', 'tuoi', 'diachi', 'cmnd', 'ngaycap', 'kinhnghiemcv', 'sothich', 'chieucao', 'cannang', 'daunguon', 'thiluc', 'lop_id', 'nhommau_id', 'trinhdohocvan_id', 'congtacvien_id', 'loaidanhsach_id', 'khuvuc_id', 'noicap', 'noihoctap', 'noisinh'], 'required'],
+            [['ma', 'name', 'gioitinh', 'ngaysinh', 'chieucao', 'cannang','trinhdohocvan_id','phuongxa','quanhuyen','tinhthanh'], 'required'],
             [['gioitinh', 'tinhtranghonnhan', 'kinhnghiemcv', 'taythuan', 'ghichuthetrang'], 'string'],
-            [['ngaysinh', 'ngaycap', 'ngaynhaptruong', 'ngaykham'], 'safe'],
-            [['tuoi', 'thiluc', 'lop_id', 'benhvien_id', 'nhommau_id', 'trinhdohocvan_id', 'congtacvien_id', 'loaidanhsach_id', 'khuvuc_id', 'noicap', 'noihoctap', 'noisinh'], 'integer'],
+            [['ngaysinh', 'ngaycap', 'ngaynhaptruong', 'ngaykham','khuvuc_id','noicap', 'noihoctap', 'noisinh','anhdaidien','nhommau_id','trinhdohocvan_id', 'benhvien_id','congtacvien_id'], 'safe'],
+            [['tuoi', 'thiluc', 'lop_id','loaidanhsach_id'], 'integer'],
             [['ma', 'code', 'tentiengnhat', 'sothich', 'daunguon'], 'string', 'max' => 255],
             [['name'], 'string', 'max' => 100],
             [['diachi'], 'string', 'max' => 500],
             [['dienthoai', 'dienthoaikhancap', 'cmnd', 'chieucao', 'cannang', 'hinhxam'], 'string', 'max' => 45],
-            [['lop_id'], 'exist', 'skipOnError' => true, 'targetClass' => Lopchitiet::className(), 'targetAttribute' => ['lop_id' => 'id']],
-            [['benhvien_id'], 'exist', 'skipOnError' => true, 'targetClass' => Benhvien::className(), 'targetAttribute' => ['benhvien_id' => 'id']],
-            [['nhommau_id'], 'exist', 'skipOnError' => true, 'targetClass' => Nhommau::className(), 'targetAttribute' => ['nhommau_id' => 'id']],
-            [['trinhdohocvan_id'], 'exist', 'skipOnError' => true, 'targetClass' => Trinhdohocvan::className(), 'targetAttribute' => ['trinhdohocvan_id' => 'id']],
-            [['congtacvien_id'], 'exist', 'skipOnError' => true, 'targetClass' => Congtacvien::className(), 'targetAttribute' => ['congtacvien_id' => 'id']],
-            [['loaidanhsach_id'], 'exist', 'skipOnError' => true, 'targetClass' => Loaidanhsach::className(), 'targetAttribute' => ['loaidanhsach_id' => 'id']],
-            [['khuvuc_id'], 'exist', 'skipOnError' => true, 'targetClass' => Khuvuc::className(), 'targetAttribute' => ['khuvuc_id' => 'id']],
-            [['noicap'], 'exist', 'skipOnError' => true, 'targetClass' => Khuvuc::className(), 'targetAttribute' => ['noicap' => 'id']],
-            [['noihoctap'], 'exist', 'skipOnError' => true, 'targetClass' => Khuvuc::className(), 'targetAttribute' => ['noihoctap' => 'id']],
-            [['noisinh'], 'exist', 'skipOnError' => true, 'targetClass' => Khuvuc::className(), 'targetAttribute' => ['noisinh' => 'id']],
+            // [['lop_id'], 'exist', 'skipOnError' => true, 'targetClass' => Lopchitiet::className(), 'targetAttribute' => ['lop_id' => 'id']],
+            // [['benhvien_id'], 'exist', 'skipOnError' => true, 'targetClass' => Benhvien::className(), 'targetAttribute' => ['benhvien_id' => 'id']],
+            // [['nhommau_id'], 'exist', 'skipOnError' => true, 'targetClass' => Nhommau::className(), 'targetAttribute' => ['nhommau_id' => 'id']],
+            // [['trinhdohocvan_id'], 'exist', 'skipOnError' => true, 'targetClass' => Trinhdohocvan::className(), 'targetAttribute' => ['trinhdohocvan_id' => 'id']],
+            // [['congtacvien_id'], 'exist', 'skipOnError' => true, 'targetClass' => Congtacvien::className(), 'targetAttribute' => ['congtacvien_id' => 'id']],
+            // [['loaidanhsach_id'], 'exist', 'skipOnError' => true, 'targetClass' => Loaidanhsach::className(), 'targetAttribute' => ['loaidanhsach_id' => 'id']],
+            // [['khuvuc_id'], 'exist', 'skipOnError' => true, 'targetClass' => Khuvuc::className(), 'targetAttribute' => ['khuvuc_id' => 'id']],
+            // [['noicap'], 'exist', 'skipOnError' => true, 'targetClass' => Khuvuc::className(), 'targetAttribute' => ['noicap' => 'id']],
+            // [['noihoctap'], 'exist', 'skipOnError' => true, 'targetClass' => Khuvuc::className(), 'targetAttribute' => ['noihoctap' => 'id']],
+            // [['noisinh'], 'exist', 'skipOnError' => true, 'targetClass' => Khuvuc::className(), 'targetAttribute' => ['noisinh' => 'id']],
         ];
     }
 
@@ -131,10 +133,14 @@ class Hocvien extends \yii\db\ActiveRecord
             'trinhdohocvan_id' => Yii::t('app', 'Trình độ học vấn'),
             'congtacvien_id' => Yii::t('app', 'Cộng tác viên'),
             'loaidanhsach_id' => Yii::t('app', 'Loại danh sách'),
-            'khuvuc_id' => Yii::t('app', 'Khuvuc ID'),
-            'noicap' => Yii::t('app', 'Noicap'),
-            'noihoctap' => Yii::t('app', 'Noihoctap'),
-            'noisinh' => Yii::t('app', 'Noisinh'),
+            'khuvuc_id' => Yii::t('app', 'Địa chỉ thường trú (Xã/Phường - Quận/Huyện - Tỉnh/Thành)'),
+            'noicap' => Yii::t('app', 'Nơi cấp'),
+            'noihoctap' => Yii::t('app', 'Nơi học tập'),
+            'noisinh' => Yii::t('app', 'Nơi sinh'),
+            'phuongxa' => Yii::t('app', 'Phường/Xã'),
+            'quanhuyen' => Yii::t('app', 'Quận/Huyện'),
+            'tinhthanh' => Yii::t('app', 'Tỉnh/Thành phố'),
+
         ];
     }
 
@@ -244,7 +250,46 @@ class Hocvien extends \yii\db\ActiveRecord
 
     public function beforeSave($insert)
     {
+        $tinh_id = myFuncs::getIdOtherModel($this->quanhuyen,new Khuvuc(),['name'=>'kieu','value'=>'quanhuyen']);
+        $quan_id = myFuncs::getIdOtherModel($this->quanhuyen,new Khuvuc(),['name'=>'kieu','value'=>'quanhuyen'],['name_more'=>'parent_id','value_more'=>$tinh_id]);
+        $this->khuvuc_id = myFuncs::getIdOtherModel($this->phuongxa,new Khuvuc(),['name'=>'kieu','value'=>'phuongxa'],['name_more'=>'parent_id','value_more'=>$quan_id]);
+        $this->nhommau_id = myFuncs::getIdOtherModel($this->nhommau_id,new Nhommau());
+        $this->congtacvien_id = myFuncs::getIdOtherModel($this->congtacvien_id,new Congtacvien());
+        $this->benhvien_id = myFuncs::getIdOtherModel($this->benhvien_id,new Benhvien());
+        $this->noisinh = myFuncs::getIdOtherModel($this->noisinh,new Khuvuc());
+        $this->noihoctap = myFuncs::getIdOtherModel($this->noihoctap,new Khuvuc());
+        $this->noicap = myFuncs::getIdOtherModel($this->noicap,new Khuvuc());
+        $this->trinhdohocvan_id = myFuncs::getIdOtherModel($this->trinhdohocvan_id,new Trinhdohocvan());
         $this->code = myFuncs::createCode($this->name);
+        $this->ngaysinh = myFuncs::convertDateSaveIntoDb($this->ngaysinh);
+        $this->ngaycap = myFuncs::convertDateSaveIntoDb($this->ngaycap);
+        $this->ngaykham = myFuncs::convertDateSaveIntoDb($this->ngaykham);
+        $this->tuoi = intval(date('Y',time()))-intval(date('Y',strtotime($this->ngaysinh)));
         return parent::beforeSave($insert); // TODO: Change the autogenerated stub
+    }
+    public function afterSave($insert, $changedAttributes)
+    {
+        $file = UploadedFile::getInstance($this, 'anhdaidien');
+        $oldFileName = '';
+        if(isset($changedAttributes['anhdaidien']))
+            $oldFileName = $changedAttributes['anhdaidien'];
+        if($insert)
+            $filename = 'no-photo.png';
+        else
+            $filename = $oldFileName;
+        if(!is_null($file)){
+            $filename = myFuncs::createCode(time().$file->name);
+            $path = dirname(dirname(__DIR__)).'/anhhocvien/'.$filename;
+            $file->saveAs($path);
+        }
+        if(!$insert && !is_null($file)){
+            if($oldFileName != 'no-photo.png'){
+                $path = dirname(dirname(__DIR__)).'/anhhocvien/'.$oldFileName;
+                if(is_file($path))
+                    unlink($path);
+            }
+        }
+        $this->updateAttributes(['anhdaidien' => $filename]);
+        return parent::afterSave($insert, $changedAttributes); 
     }
 }

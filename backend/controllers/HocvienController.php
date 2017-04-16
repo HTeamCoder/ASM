@@ -4,18 +4,29 @@ namespace backend\controllers;
 
 use Yii;
 use backend\models\Hocvien;
+use backend\models\Trinhdohocvan;
+use backend\models\Congtacvien;
+use backend\models\Khuvuc;
+use backend\models\Nhommau;
+use backend\models\Donhangchitiet;
+use backend\models\Donhang;
+use backend\models\Khoa;
+use backend\models\Lop;
 use backend\models\search\HocvienSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use \yii\web\Response;
 use yii\helpers\Html;
+use yii\helpers\Json;
+use common\models\myFuncs;
 
 /**
  * HocvienController implements the CRUD actions for Hocvien model.
  */
 class HocvienController extends Controller
 {
+
     /**
      * @inheritdoc
      */
@@ -40,7 +51,6 @@ class HocvienController extends Controller
     {    
         $searchModel = new HocvienSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -79,63 +89,60 @@ class HocvienController extends Controller
      * and for non-ajax request if creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionThemhocvien()
     {
-        $request = Yii::$app->request;
-        $model = new Hocvien();  
-
-        if($request->isAjax){
-            /*
-            *   Process for ajax request
-            */
-            Yii::$app->response->format = Response::FORMAT_JSON;
-            if($request->isGet){
-                return [
-                    'title'=> "Create new Hocvien",
-                    'content'=>$this->renderAjax('create', [
-                        'model' => $model,
-                    ]),
-                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                                Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
-        
-                ];         
-            }else if($model->load($request->post()) && $model->save()){
-                return [
-                    'forceReload'=>'#crud-datatable-pjax',
-                    'title'=> "Create new Hocvien",
-                    'content'=>'<span class="text-success">Create Hocvien success</span>',
-                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                            Html::a('Create More',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
-        
-                ];         
-            }else{           
-                return [
-                    'title'=> "Create new Hocvien",
-                    'content'=>$this->renderAjax('create', [
-                        'model' => $model,
-                    ]),
-                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                                Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
-        
-                ];         
-            }
-        }else{
-            /*
-            *   Process for non-ajax request
-            */
-            if ($model->load($request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
-            } else {
-                return $this->render('create', [
-                    'model' => $model,
-                ]);
-            }
-        }
+        $hocvien = new Hocvien();
+        $hocvien->ma = 'HV-'.time();
+        return $this->render('create',['hocvien'=>$hocvien,'khoa'=> new Khoa(),'lop'=>new Lop(),'donhangchitiet'=>new Donhangchitiet(),'donhang'=>new Donhang()]);
        
     }
-    public function actionThemhocvien(){
-        $hocvien = new Hocvien();
-        return $this->render('themhocvien',['hocvien'=>$hocvien]);
+    public function actionCapnhathocvien()
+    {
+        if (isset($_GET['id'])&&$_GET['id']!='')
+        {
+            $hocvien = Hocvien::findOne($_GET['id']);
+            $hocvien->congtacvien_id = ($hocvien->congtacvien_id)?Congtacvien::findOne($hocvien->congtacvien_id)->name:$hocvien->congtacvien_id;
+            $hocvien->trinhdohocvan_id = ($hocvien->trinhdohocvan_id)?Trinhdohocvan::findOne($hocvien->trinhdohocvan_id)->name:$hocvien->trinhdohocvan_id;
+            $hocvien->nhommau_id = ($hocvien->nhommau_id)?Nhommau::findOne($hocvien->nhommau_id)->name:$hocvien->nhommau_id;
+            $hocvien->phuongxa = ($hocvien->khuvuc_id)?Khuvuc::findOne($hocvien->khuvuc_id)->name:$hocvien->phuongxa;
+            $hocvien->quanhuyen = ($hocvien->khuvuc_id)?Khuvuc::findOne($hocvien->khuvuc_id)->parent->name:$hocvien->quanhuyen;
+             $hocvien->tinhthanh = ($hocvien->khuvuc_id)?Khuvuc::findOne($hocvien->khuvuc_id)->parent->parent->name:$hocvien->tinhthanh;
+             $hocvien->ngaysinh = ($hocvien->ngaysinh)?date('d/m/Y',strtotime($hocvien->ngaysinh)):date('d/m/Y');
+            return $this->render('update',['hocvien'=>$hocvien,'khoa'=> new Khoa(),'lop'=>new Lop(),'donhangchitiet'=>new Donhangchitiet(),'donhang'=>new Donhang()]);
+        }else
+        {
+            return $this->goHome();
+        }
+        
+       
+    }
+    public function actionLuuhocvien()
+    {
+        if (isset($_POST['Hocvien']))
+        {
+            
+            if (isset($_POST['Hocvien']['id']))
+            {
+                $hocvien = Hocvien::findOne($_POST['Hocvien']['id']);
+            }
+            else
+                $hocvien = new Hocvien();
+
+            $hocvien->load(Yii::$app->request->post());
+            if ($hocvien->validate())
+            {
+                if ($hocvien->save())
+                    echo Json::encode(['error' => false, 'message' => myFuncs::getMessage('Thông báo','success',"Đã lưu học viên!")]);
+            }else
+            {
+                $loi = [];
+                foreach($hocvien->getErrors() as $item)
+                {
+                    $loi[] = $item[0];
+                }
+                echo Json::encode(['error' => true, 'class' => 'nhapxuatkho', 'errors' => $hocvien->getErrors(), 'message' => myFuncs::getMessage('Thông báo lỗi','danger',implode('</br>', $loi))]);
+            }
+        }
     }
     /**
      * Updates an existing Hocvien model.
@@ -271,4 +278,5 @@ class HocvienController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
 }

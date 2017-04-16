@@ -13694,3 +13694,42 @@ Transparent Button
     display: none;
   }
 }
+#profileTab li a
+{
+   color: #67809f;
+}
+#profileTab li.active a
+{
+   color: #fff;
+}
+.nav-tabs>li>a:hover{
+    border-color: #67809f;
+   
+}
+.nav-tabs>li.active>a:hover 
+{
+    border-color: #67809f;
+    color: #fff;
+}
+.nav>li>a:focus, .nav>li>a:hover {
+    text-decoration: none;
+    background-color: #eee;
+}
+.nav>li>a:focus
+{
+   color: #67809f;
+}
+.nav-tabs>li.active>a
+{
+  background-color: #67809f !important;
+}
+.nav-tabs {
+    border-bottom: 3px solid #67809f;
+}
+.page-header{
+  margin: 0;
+}
+.row-hocvien:hover{
+  cursor: pointer;
+  background: #dbecf3;
+}

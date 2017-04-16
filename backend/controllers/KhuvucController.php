@@ -304,4 +304,14 @@ class KhuvucController extends Controller
         
         echo Json::encode($data);
     }
+    public function actionGetrowinfo()
+    {
+        if (isset($_POST['name'])&&$_POST['name']!='')
+        {
+            $khuvuc = Khuvuc::findOne(['name'=>trim($_POST['name'])]);
+            $quanhuyen = (!is_null($khuvuc))?$khuvuc->parent->name:'';
+            $tinhthanh = (!is_null($khuvuc))?$khuvuc->parent->parent->name:'';
+            echo Json::encode(['tinhthanh' => $tinhthanh, 'quanhuyen' => $quanhuyen]);
+        }
+    }
 }

@@ -70,7 +70,7 @@ class myFuncs
         return "{$arr[2]}-{$arr[1]}-{$arr[0]}";
     }
 
-    public static function getIdOtherModel($value, $model, $attributeTitle = 'name', $attributeType = ['name' => '', 'value' => '']){
+    public static function getIdOtherModel($value, $model, $attributeTitle = 'name', $attributeType = ['name' => '', 'value' => ''],$attributeTypeMore = ['name_more' => '', 'value_more' => '']){
         if($value=="")
             return null;
 
@@ -80,7 +80,8 @@ class myFuncs
             $model->{$attributeTitle} = trim($value);
             if($attributeType['name'] != '')
                 $model->{$attributeType['name']} = trim($attributeType['value']);
-
+            if($attributeTypeMore['name_more'] != '')
+                $model->{$attributeTypeMore['name_more']} = trim($attributeTypeMore['value_more']);
             $model->save();
             return $model->id;
         }
@@ -117,7 +118,7 @@ class myFuncs
             'clientOptions' => [
                 'dateFormat' => 'dd/mm/yy',
                 'changeMonth' => true,
-                'yearRange' => '1996:2099',
+                'yearRange' => '1920:2099',
                 'changeYear' => true,
             ],
             'options' => $option

@@ -23,7 +23,7 @@ use common\models\myFuncs;
  * Site controller aaa bbb
  * dddddd
  * ccccdđ
- eeeeee
+ kkkkk
  */
 class SiteController extends Controller
 {
