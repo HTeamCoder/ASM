@@ -12,6 +12,10 @@ use backend\models\Khuvuc;
 use backend\models\Nhommau;
 use backend\models\Khoa;
 use backend\models\Donhang;
+use backend\models\Vunglamviec;
+use backend\models\Nghiepdoan;
+use backend\models\Xinghiep;
+use backend\models\Donvicungcapnguon;
 use backend\models\Lop;
 use backend\models\Benhvien;
 use backend\models\Trinhdohocvan;
@@ -30,7 +34,7 @@ class AutocompleteController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['getkhuvucxa','getkhuvuchuyen','getkhuvuctinh','getbenhvien','getcongtacvien','getnoisinh','getnoihoctap' , 'gettrinhdohocvan', 'getnoicap', 'getnhommau','getkhoahoc','getlophoc','getdonhang'],
+                        'actions' => ['getkhuvucxa','getkhuvuchuyen','getkhuvuctinh','getbenhvien','getcongtacvien','getnoisinh','getnoihoctap' , 'gettrinhdohocvan', 'getnoicap', 'getnhommau','getkhoahoc','getlophoc','getdonhang','getvunglamviec','getxinghiep','getnghiepdoan','getdonvicungcapnguon'],
                         'allow' => true,
                         'roles' => ['@']
                     ],
@@ -109,6 +113,26 @@ class AutocompleteController extends Controller
     public function actionGetdonhang(){
         $name = \Yii::$app->request->get('query');
         $part = Donhang::find()->where('name LIKE :name', [':name' => "%{$name}%"])->all();
+        echo Json::encode($part);
+    }
+    public function actionGetvunglamviec(){
+        $name = \Yii::$app->request->get('query');
+        $part = Vunglamviec::find()->where('name LIKE :name', [':name' => "%{$name}%"])->all();
+        echo Json::encode($part);
+    }
+    public function actionGetnghiepdoan(){
+        $name = \Yii::$app->request->get('query');
+        $part = Nghiepdoan::find()->where('name LIKE :name', [':name' => "%{$name}%"])->all();
+        echo Json::encode($part);
+    }
+    public function actionGetxinghiep(){
+        $name = \Yii::$app->request->get('query');
+        $part = Xinghiep::find()->where('name LIKE :name', [':name' => "%{$name}%"])->all();
+        echo Json::encode($part);
+    }
+    public function actionGetdonvicungcapnguon(){
+        $name = \Yii::$app->request->get('query');
+        $part = Donvicungcapnguon::find()->where('name LIKE :name', [':name' => "%{$name}%"])->all();
         echo Json::encode($part);
     }
 }

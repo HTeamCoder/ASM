@@ -250,6 +250,7 @@ class Hocvien extends \yii\db\ActiveRecord
 
     public function beforeSave($insert)
     {
+
         $tinh_id = myFuncs::getIdOtherModel($this->quanhuyen,new Khuvuc(),['name'=>'kieu','value'=>'quanhuyen']);
         $quan_id = myFuncs::getIdOtherModel($this->quanhuyen,new Khuvuc(),['name'=>'kieu','value'=>'quanhuyen'],['name_more'=>'parent_id','value_more'=>$tinh_id]);
         $this->khuvuc_id = myFuncs::getIdOtherModel($this->phuongxa,new Khuvuc(),['name'=>'kieu','value'=>'phuongxa'],['name_more'=>'parent_id','value_more'=>$quan_id]);
@@ -290,6 +291,22 @@ class Hocvien extends \yii\db\ActiveRecord
             }
         }
         $this->updateAttributes(['anhdaidien' => $filename]);
+
+        if (isset($_POST['Chitietdonhang'])&&count($_POST['Chitietdonhang']))
+        {
+            if (!$this->isNewRecord)
+            {
+                Chitietdonhang::deleteAll(['hocvien_id'=>$this->id]);
+            }
+            foreach($_POST['Chitietdonhang'] as $chitiet)
+            {
+                $chitietdonhang = new Chitietdonhang();
+                $chitietdonhang->ghichu = $chitiet['ghichu'];
+                $chitietdonhang->hocvien_id = $this->id;
+                $chitietdonhang->donhang_id = myFuncs::getIdOtherModel($chitiet->donhang_id,new Donhang());
+                $chitietdonhang->save();
+            }
+        }
         return parent::afterSave($insert, $changedAttributes); 
     }
 }

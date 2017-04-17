@@ -27,6 +27,9 @@ $role = User::getRole();
                         <li class="classic-menu-dropdown">
                             <?=Html::a('<i class="fa fa-bookmark-o"></i> Loại danh sách', Yii::$app->urlManager->createUrl(['loaidanhsach']))?>
                         </li>
+                         <li class="classic-menu-dropdown">
+                            <?=Html::a('<i class="fa fa-bookmark-o"></i> Đơn hàng', Yii::$app->urlManager->createUrl(['donhang']))?>
+                        </li>
                         <li class="classic-menu-dropdown">
                             <?=Html::a('<i class="fa fa-bookmark-o"></i> Khóa học', Yii::$app->urlManager->createUrl(['khoa']))?>
                         </li>
@@ -80,9 +83,6 @@ $role = User::getRole();
                             <?=Html::a('<i class="fa fa-bookmark-o"></i> Danh sách học viên', Yii::$app->urlManager->createUrl(['hocvien']))?>
                         </li>
                     </ul>
-                </li>
-                <li class="classic-menu-dropdown">
-                    <?=Html::a('<i class="fa fa-bookmark-o"></i> Đào tạo', Yii::$app->urlManager->createUrl(['index']))?>
                 </li>
                 <li class="classic-menu-dropdown">
                     <?=Html::a('<i class="fa fa-bookmark-o"></i> Cấu hình', Yii::$app->urlManager->createUrl(['cauhinh']))?>

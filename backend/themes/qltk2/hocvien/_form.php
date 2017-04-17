@@ -9,7 +9,7 @@ use yii\widgets\ActiveForm;
 
 <div class="hocvien-form">
 
-    <?=\yii\bootstrap\Html::hiddenInput('Hocvien[id]',$model->id)?>
+    <?= (!$model->isNewRecord)?\yii\bootstrap\Html::hiddenInput('Hocvien[id]',$model->id):''?>
     <div class="row">
         <div class="col-md-3">
              <?= $form->field($model, 'ma')->textInput(['maxlength' => true,'autocomplete'=>'off'])->label('Mã học viên') ?>
@@ -43,7 +43,7 @@ use yii\widgets\ActiveForm;
            <?= $form->field($model, 'taythuan')->dropDownList([ 'phai' => 'Phải', 'trai' => 'Trái', ]) ?>
         </div>
         <div class="col-md-3">
-             <?= $form->field($model, 'thiluc')->textInput(['autocomplete'=>'off','type' => 'number']) ?>
+             <?= $form->field($model, 'thiluc')->textInput(['autocomplete'=>'off','type' => 'number','min'=>0,'max'=>10]) ?>
         </div>
         <div class="col-md-3">
            <?= $form->field($model, 'hinhxam')->textInput(['maxlength' => true,'autocomplete'=>'off']) ?>
@@ -101,8 +101,11 @@ use yii\widgets\ActiveForm;
         <div class="col-md-3">
                  <?= $form->field($model, 'noicap')->textInput(['class'=>'noicap form-control','autocomplete'=>'off'])->label('Nơi cấp') ?>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-3">
                 <?= $form->field($model, 'daunguon')->textInput(['maxlength' => true,'autocomplete'=>'off']) ?>
+        </div>
+        <div class="col-md-3">
+                 <?= $form->field($model, 'noisinh')->textInput(['class'=>'noisinh form-control','autocomplete'=>'off'])->label('Nơi sinh') ?>
         </div>  
     </div>
     <div class="row">
@@ -110,7 +113,7 @@ use yii\widgets\ActiveForm;
                   <?= $form->field($model, 'noihoctap')->textInput(['class'=>'noihoctap form-control','autocomplete'=>'off'])->label('Nơi học tập') ?>
         </div>
         <div class="col-md-6">
-                <?= $form->field($model, 'noisinh')->textInput(['class'=>'noisinh form-control','autocomplete'=>'off'])->label('Nơi sinh') ?>
+                <?= $form->field($model, 'loaidanhsach_id')->dropDownList(\yii\helpers\ArrayHelper::map(backend\models\Loaidanhsach::find()->select('id, name')->all(),'id','name'))->label('Thuộc loại danh sách')  ?>
         </div>
     </div>
     <div class="row">

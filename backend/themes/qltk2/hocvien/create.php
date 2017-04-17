@@ -29,7 +29,7 @@ $this->title = 'Thêm mới học viên';
 						                                    <?=\yii\bootstrap\Html::img('anhhocvien/'.$hocvien->anhdaidien)?>
 						                                <?php endif; ?>
 						                            </div>
-						                            <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;">
+						                            <div class="fileinput-preview fileinput-exists thumbnail " style="max-width: 200px; max-height: 150px;">
 						                            </div>
 						                            <div>
 						                                <span class="btn btn-success btn-file">
@@ -84,7 +84,7 @@ $this->title = 'Thêm mới học viên';
 													</h4>
 												  </div><!-- /.col -->
 												</div>
-												<?= $this->render('_form_don_hang',['donhang'=>$donhangchitiet,'form'=>$form]); ?>
+												<?= $this->render('_form_don_hang',['donhang'=>$donhangchitiet,'form'=>$form,'hocvien'=>$hocvien]); ?>
 											</div>
 										</div>
 									</div>
@@ -95,7 +95,7 @@ $this->title = 'Thêm mới học viên';
           	</div>
 			<?php $form = ActiveForm::end()?>
 				<div class="col-md-12 text-right">
-					<?=\yii\bootstrap\Html::button('<i class="fa fa-save"></i> '.($hocvien->id == ''?'Lưu lại':'Cập nhật và quay lại danh sách'),['class' => 'btn btn-save btn-success'])?>
+					<?=\yii\bootstrap\Html::button('<i class="fa fa-save"></i> Lưu lại',['class' => 'btn btn-save btn-success'])?>
 				</div>
 
 <?php $this->registerCssFile(Yii::$app->request->baseUrl.'/backend/themes/qltk2/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css') ?>

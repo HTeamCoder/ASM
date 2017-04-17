@@ -75,7 +75,7 @@ $this->title = 'Cập nhật học viên '.$hocvien->name;
 													</h4>
 												  </div><!-- /.col -->
 												</div>
-												<?= $this->render('_form_hoc_tap',['hocvien'=>$hocvien,'khoa'=>$khoa,'lop'=>$lop,'form'=>$form]); ?>
+												<?= $this->render('_form_hoc_tap',['hocvien'=>$hocvien,'khoa'=>$khoa,'lop'=>$lop,'form'=>$form,'hocvien'=>$hocvien]); ?>
 											</div>
 											<div class="tab-pane" id="donhang">
 												<div class="row">
@@ -85,7 +85,7 @@ $this->title = 'Cập nhật học viên '.$hocvien->name;
 													</h4>
 												  </div><!-- /.col -->
 												</div>
-												<?= $this->render('_form_don_hang',['donhang'=>$donhangchitiet,'form'=>$form]); ?>
+												<?= $this->render('_form_don_hang',['donhang'=>$donhangchitiet,'form'=>$form,'hocvien'=>$hocvien]); ?>
 											</div>
 										</div>
 									</div>

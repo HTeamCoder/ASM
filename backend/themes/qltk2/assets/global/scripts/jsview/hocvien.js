@@ -69,9 +69,10 @@ $('#hocvien-name').focus();
                     $("#form-hocvien")[0].reset();
                     $('#hocvien-name').focus();
                 }
-                if ($('#hocvien-id').val()!='')
+                if ($('#hocvien-id').length>0)
                 {
-                    window.location = 'index.php?r=hocvien';
+                    if($('#hocvien-id').val()!='')
+                        window.location = 'index.php?r=hocvien';
                 }
                 $('.thongbao').html(data.message);
             },
@@ -86,3 +87,20 @@ $('#hocvien-name').focus();
             processData: false,
         })
     });
+$(document).on('click', '.btn-remove', function (e) {
+        e.preventDefault();
+        if($("#table-donhang tbody tr").length > 0){
+            if(confirm("Bạn có chắc chắn muốn xóa không?"))
+            {
+                $(this).parent().parent().remove();
+            }
+        }
+    });
+$(document).on('click', '.btn-themdonhang', function (e) {
+        e.preventDefault();
+        var index = $('#soluongdonhang').val();
+       $("#table-donhang tbody").append('<tr><td><input type="text" class="form-control donhang" name=Donhangchitiet['+index+'][donhang_id]" autocomplete="off"></td><td><input type="text" class="form-control ghichu" name=Donhangchitiet['+index+'][ghichu]"></td><td class="text-center"><a class="btn-remove btn btn-sm btn-danger " href="#"><i class="fa fa-trash"></i></a></td></tr>');
+       index++;
+        $('#soluongdonhang').val(index);
+        createTypeHead('.donhang','getdonhang');
+});
