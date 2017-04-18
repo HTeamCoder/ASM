@@ -193,5 +193,11 @@ class HocvienController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
-
+    public function actionGetinfo(){
+        if(isset($_POST['item'])){
+            $hocvien = Hocvien::find()->where('(ma = :d or name = :d)',[':d' => $_POST['item']])->one();
+            $hocvien->ngaysinh = date('d/m/Y',strtotime($hocvien->ngaysinh));
+            echo Json::encode($hocvien);
+        }
+    }
 }

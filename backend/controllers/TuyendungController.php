@@ -86,11 +86,55 @@ class TuyendungController extends Controller
      * and for non-ajax request if creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionThemhocvien()
+    public function actionLuudangky()
     {
-        $hocvien = new Hocvien();
-        $hocvien->ma = 'HV-'.time();
-        return $this->render('create',['hocvien'=>$hocvien,'khoa'=> new Khoa(),'lop'=>new Lop(),'donhangchitiet'=>new Donhangchitiet(),'donhang'=>new Donhang()]);
+        $loi = [];
+        if (isset($_POST['Hocvien']))
+        {
+            $hocvien = Hocvien::findOne(['ma'=>$_POST['Hocvien']['ma']]);
+            if (!is_null($hocvien))
+                $hocvien->load(\Yii::$app->request->post());
+        }else
+        {
+            $loi[] = 'Không tồn tại học viên này';
+        }
+        
+        if ($_POST['Hocvien']['ma']=='')
+            $loi[] = 'Mã học viên không được để trống';
+        if ($_POST['Hocvien']['name'] == '')
+             $loi[] = 'Tên học viên không được để trống';
+
+
+         if (isset($_POST['Donhangchitiet']))
+         {
+            array_pop($_POST['Donhangchitiet']);
+            var_dump($_POST['Donhangchitiet']);die;
+            foreach($_POST['Donhangchitiet'] as $key=>$donhangchitiet)
+            {
+                if($_POST['Donhangchitiet'][$key]['donhang_id'] == '')
+                    $loi[] = 'Chưa nhập đủ tên đơn hàng';            
+            }
+         }else
+         {
+            $loi[] = 'Chưa có đơn hàng';  
+         }
+         if (count($loi) > 0)
+         {
+            echo Json::encode(['error' => true,'message' => myFuncs::getMessage('Lỗi','danger',implode('<br/>',$loi))]);
+         }else
+         {
+            $hocvien->save();
+
+            foreach($_POST['Donhangchitiet'] as $key=>$chitiet)
+            {
+                $donhangchitiet = new Donhangchitiet();
+                $donhangchitiet->hocvien_id = $hocvien->id;
+                $donhangchitiet->donhang_id = myFuncs::getIdOtherModel($chitiet['donhang_id'],new Donhang());
+                $donhangchitiet->ghichu = $chitiet['ghichu'];
+                $donhangchitiet->save();
+            }
+            echo Json::encode(['error' => false,'message' => myFuncs::getMessage('Thông báo','success', 'Đã lưu xong')]);
+         }
        
     }
     public function actionCapnhathocvien()

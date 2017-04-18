@@ -2,6 +2,8 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
  ?>
+<div class="thongbao"></div>
+<input type="hidden" id="idhocvien" value="<?= $hocvien->id ?>">
 <div class="portlet box blue-hoki">
                 <div class="portlet-title">
                     <div class="caption">
@@ -61,7 +63,7 @@ use yii\widgets\ActiveForm;
                      <div class="table-scrollable">
                         <table class="table table-striped table-bordered table-hover" id="table-donhang">
                             <thead>
-                            <tr><th>Đơn hàng</th><th>Ngày thi</th><th>Ngày đỗ</th><th>Ghi chú</th><th class="text-center">Xóa</th></tr>
+                            <tr><th>Đơn hàng</th><th>Ghi chú</th><th>Ngày thi</th><th>Ngày đỗ</th><th class="text-center">Xóa</th></tr>
                             </thead>
                             <tbody>
                             <?php if($hocvien->id != ''):?>
@@ -103,4 +105,6 @@ use yii\widgets\ActiveForm;
                     <?php \yii\bootstrap\ActiveForm::end(); ?>
                 </div>
 </div>
-<?=\yii\bootstrap\Html::button('<i class="fa fa-print"></i> Lưu lại',['class' => 'btn btn-print-save btn-success'])?>
+<?=\yii\bootstrap\Html::button('<i class="fa fa-print"></i> Lưu lại',['class' => 'btn btn-dangky btn-success'])?>
+<?php $this->registerJsFile(Yii::$app->request->baseUrl.'/backend/themes/qltk2/assets/global/scripts/bootstrap3-typeahead.js',[ 'depends' => ['backend\assets\Qltk2Asset'], 'position' => \yii\web\View::POS_END ]); ?>
+<?php $this->registerJsFile(Yii::$app->request->baseUrl.'/backend/themes/qltk2/assets/global/scripts/jsview/dangky.js',[ 'depends' => ['backend\assets\Qltk2Asset'], 'position' => \yii\web\View::POS_END ]); ?>

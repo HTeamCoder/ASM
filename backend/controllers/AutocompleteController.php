@@ -17,6 +17,7 @@ use backend\models\Nghiepdoan;
 use backend\models\Xinghiep;
 use backend\models\Donvicungcapnguon;
 use backend\models\Lop;
+use backend\models\Hocvien;
 use backend\models\Benhvien;
 use backend\models\Trinhdohocvan;
 use backend\models\Congtacvien;
@@ -34,7 +35,7 @@ class AutocompleteController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['getkhuvucxa','getkhuvuchuyen','getkhuvuctinh','getbenhvien','getcongtacvien','getnoisinh','getnoihoctap' , 'gettrinhdohocvan', 'getnoicap', 'getnhommau','getkhoahoc','getlophoc','getdonhang','getvunglamviec','getxinghiep','getnghiepdoan','getdonvicungcapnguon'],
+                        'actions' => ['getkhuvucxa','getkhuvuchuyen','getkhuvuctinh','getbenhvien','getcongtacvien','getnoisinh','getnoihoctap' , 'gettrinhdohocvan', 'getnoicap', 'getnhommau','getkhoahoc','getlophoc','getdonhang','getvunglamviec','getxinghiep','getnghiepdoan','getdonvicungcapnguon','gethocvien'],
                         'allow' => true,
                         'roles' => ['@']
                     ],
@@ -133,6 +134,11 @@ class AutocompleteController extends Controller
     public function actionGetdonvicungcapnguon(){
         $name = \Yii::$app->request->get('query');
         $part = Donvicungcapnguon::find()->where('name LIKE :name', [':name' => "%{$name}%"])->all();
+        echo Json::encode($part);
+    }
+    public function actionGethocvien(){
+        $name = \Yii::$app->request->get('query');
+        $part = Hocvien::find()->where('(ma LIKE :name or name LIKE :name)', [':name' => "%{$name}%"])->limit(\Yii::$app->request->get('page_limit'))->all();
         echo Json::encode($part);
     }
 }

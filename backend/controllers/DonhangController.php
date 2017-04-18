@@ -10,7 +10,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use \yii\web\Response;
 use yii\helpers\Html;
-
+use yii\helpers\Json;
 /**
  * DonhangController implements the CRUD actions for Donhang model.
  */
@@ -266,6 +266,13 @@ class DonhangController extends Controller
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+
+    public function actionGetrowinfo(){
+        if(isset($_POST['name'])){
+            $donhang = Donhang::find()->where('(name = :d)',[':d' => $_POST['name']])->one();
+            echo Json::encode($donhang);
         }
     }
 }
