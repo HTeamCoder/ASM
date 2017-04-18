@@ -22,7 +22,7 @@ use yii\helpers\Json;
 use common\models\myFuncs;
 
 /**
- * HocvienController implements the CRUD actions for Hocvien model.
+ * HocvienController implements the CRUD actions for Hocvien model.tessss
  */
 class TuyendungController extends Controller
 {

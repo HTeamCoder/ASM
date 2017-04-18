@@ -129,7 +129,7 @@ use yii\widgets\ActiveForm;
             <?= $form->field($model, 'ghichuthetrang')->textarea(['rows' => 1]) ?>
         </div>
     </div>
-
+    <div class="row"></div>
 
     
 </div>
