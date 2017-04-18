@@ -12,7 +12,7 @@ use backend\models\Donhangchitiet;
 use backend\models\Donhang;
 use backend\models\Khoa;
 use backend\models\Lop;
-use backend\models\search\HocvienSearch;
+use backend\models\search\TuyendungSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -24,7 +24,7 @@ use common\models\myFuncs;
 /**
  * HocvienController implements the CRUD actions for Hocvien model.
  */
-class HocvienController extends Controller
+class TuyendungController extends Controller
 {
 
     /**
@@ -49,7 +49,7 @@ class HocvienController extends Controller
      */
     public function actionIndex()
     {    
-        $searchModel = new HocvienSearch();
+        $searchModel = new TuyendungSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -63,14 +63,21 @@ class HocvienController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionChitiethocvien()
+    public function actionDangky()
     {   
-         if (isset($_POST['mahocvien'])&&intval(trim($_POST['mahocvien']))!='')
-            {
-                $hocvien = Hocvien::findOne(intval(trim($_POST['mahocvien'])));
-                Yii::$app->response->format = Response::FORMAT_JSON;
-                return $this->renderAjax('_chitiethocvien',['hocvien'=>$hocvien]);
-            }
+        if (isset($_GET['id'])&&$_GET['id']!='')
+        {
+            $hocvien = Hocvien::findOne(intval(trim($_GET['id'])));
+            $donhangchitiet = Donhangchitiet::findAll(['hocvien_id'=>intval(trim($_GET['id']))]);
+        }else
+        {
+            $hocvien = new Hocvien();
+            $donhangchitiet = new Donhangchitiet();
+        }
+         return $this->render('dangky', [
+            'hocvien' => $hocvien,
+            'donhangchitiet' => $donhangchitiet,
+        ]);
     }
 
     /**

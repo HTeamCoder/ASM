@@ -13729,7 +13729,31 @@ Transparent Button
 .page-header{
   margin: 0;
 }
-.row-hocvien:hover{
-  cursor: pointer;
-  background: #dbecf3;
+.profile-label{
+    background: #F4F4F4;
+    border-bottom: 1px solid #ddd;
+    padding: 12px;
+    word-wrap: break-word;
+}
+.profile-text
+{
+    background: #fff;
+    border-bottom: 1px solid #ddd;
+    padding: 12px;
+    word-wrap: break-word;
+    height: 43px;
+}
+.modal-lg
+{
+  width: 90% !important;
+}
+.img-box-chitiethocvien
+{
+  padding: 10px;
+  border: 1px solid #ececf0;
+  box-shadow: 0 0 6px 1px #ececf0;
+}
+.mg-bot-10
+{
+  margin-bottom: 10px !important;
 }

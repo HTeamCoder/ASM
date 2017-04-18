@@ -2412,3 +2412,7 @@ AngularJS UI-select
 .minicolors-swatch {
   border: 0;
 }
+.row-hocvien:hover{
+  cursor: pointer;
+  background: #b4ddf0;
+}

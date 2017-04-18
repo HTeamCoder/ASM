@@ -17,6 +17,7 @@ CrudAsset::register($this);
 
 ?>
 <div class="hocvien-index">
+    <div class="thongbao"></div>
     <div id="ajaxCrudDatatable">
         <?=GridView::widget([
             'id'=>'crud-datatable',
@@ -27,10 +28,10 @@ CrudAsset::register($this);
             'toolbar'=> [
                 ['content'=>
                     Html::a('<i class="glyphicon glyphicon-plus"></i> Thêm mới học viên',Url::toRoute(['hocvien/themhocvien']),
-                    ['title'=> 'Thêm mới học viên','class'=>'btn btn-success'])
+                    ['title'=> 'Thêm mới học viên','class'=>'btn btn-success','data-pjax'=>0])
                 ],
             ],          
-            'striped' => true,
+            'striped' => false,
             'condensed' => true,
             'responsive' => true,    
             'rowOptions' => function ($model, $key, $index, $grid){
@@ -57,8 +58,11 @@ CrudAsset::register($this);
     </div>
 </div>
 <?php Modal::begin([
-    "id"=>"ajaxCrudModal",
-    "footer"=>"",// always need it for jquery plugin
+    'header' => '<h4 style="margin:0;" id="modal-title">Hồ sơ học viên</h4>',
+    "id"=>"chitiethocvien",
+    "footer"=>'<button type="button" class="btn btn-close" data-dismiss="modal">Đóng</button>',
+    'size'=>'modal-lg'
 ])?>
+<div class="box-chitiethocvien"></div>
 <?php Modal::end(); ?>
 <?php $this->registerJsFile(Yii::$app->request->baseUrl.'/backend/themes/qltk2/assets/global/scripts/jsview/indexhocvien.js',[ 'depends' => ['backend\assets\Qltk2Asset'], 'position' => \yii\web\View::POS_END ]); ?>

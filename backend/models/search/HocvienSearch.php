@@ -41,10 +41,13 @@ class HocvienSearch extends Hocvien
      */
     public function search($params)
     {
-        $query = Hocvien::find();
+        $query = Hocvien::find()->orderBy('id DESC');
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination' => [
+                'pageSize' => 10,
+            ],
         ]);
 
         $this->load($params);
@@ -96,4 +99,5 @@ class HocvienSearch extends Hocvien
 
         return $dataProvider;
     }
+    
 }
