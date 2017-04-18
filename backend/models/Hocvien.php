@@ -1,7 +1,5 @@
 <?php
-
 namespace backend\models;
-
 use Yii;
 use common\models\myFuncs;
 use yii\web\UploadedFile;
@@ -68,7 +66,6 @@ class Hocvien extends \yii\db\ActiveRecord
     {
         return '{{%hocvien}}';
     }
-
     /**
      * @inheritdoc
      */
@@ -95,7 +92,6 @@ class Hocvien extends \yii\db\ActiveRecord
             // [['noisinh'], 'exist', 'skipOnError' => true, 'targetClass' => Khuvuc::className(), 'targetAttribute' => ['noisinh' => 'id']],
         ];
     }
-
     /**
      * @inheritdoc
      */
@@ -140,10 +136,8 @@ class Hocvien extends \yii\db\ActiveRecord
             'phuongxa' => Yii::t('app', 'Phường/Xã'),
             'quanhuyen' => Yii::t('app', 'Quận/Huyện'),
             'tinhthanh' => Yii::t('app', 'Tỉnh/Thành phố'),
-
         ];
     }
-
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -151,7 +145,6 @@ class Hocvien extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Chitietdanhgia::className(), ['hocvien_id' => 'id']);
     }
-
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -159,7 +152,6 @@ class Hocvien extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Donhangchitiet::className(), ['hocvien_id' => 'id']);
     }
-
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -167,7 +159,6 @@ class Hocvien extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Lopchitiet::className(), ['id' => 'lop_id']);
     }
-
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -175,7 +166,6 @@ class Hocvien extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Benhvien::className(), ['id' => 'benhvien_id']);
     }
-
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -183,7 +173,6 @@ class Hocvien extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Nhommau::className(), ['id' => 'nhommau_id']);
     }
-
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -191,7 +180,6 @@ class Hocvien extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Trinhdohocvan::className(), ['id' => 'trinhdohocvan_id']);
     }
-
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -199,7 +187,6 @@ class Hocvien extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Congtacvien::className(), ['id' => 'congtacvien_id']);
     }
-
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -207,7 +194,6 @@ class Hocvien extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Loaidanhsach::className(), ['id' => 'loaidanhsach_id']);
     }
-
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -215,7 +201,6 @@ class Hocvien extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Khuvuc::className(), ['id' => 'khuvuc_id']);
     }
-
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -223,7 +208,6 @@ class Hocvien extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Khuvuc::className(), ['id' => 'noicap']);
     }
-
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -231,7 +215,6 @@ class Hocvien extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Khuvuc::className(), ['id' => 'noihoctap']);
     }
-
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -239,7 +222,6 @@ class Hocvien extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Khuvuc::className(), ['id' => 'noisinh']);
     }
-
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -247,10 +229,8 @@ class Hocvien extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Ketquahoctap::className(), ['hocvien_id' => 'id']);
     }
-
     public function beforeSave($insert)
     {
-
         $tinh_id = myFuncs::getIdOtherModel($this->quanhuyen,new Khuvuc(),['name'=>'kieu','value'=>'quanhuyen']);
         $quan_id = myFuncs::getIdOtherModel($this->quanhuyen,new Khuvuc(),['name'=>'kieu','value'=>'quanhuyen'],['name_more'=>'parent_id','value_more'=>$tinh_id]);
         $this->khuvuc_id = myFuncs::getIdOtherModel($this->phuongxa,new Khuvuc(),['name'=>'kieu','value'=>'phuongxa'],['name_more'=>'parent_id','value_more'=>$quan_id]);
@@ -291,7 +271,6 @@ class Hocvien extends \yii\db\ActiveRecord
             }
         }
         $this->updateAttributes(['anhdaidien' => $filename]);
-
         if (isset($_POST['Chitietdonhang'])&&count($_POST['Chitietdonhang']))
         {
             if (!$this->isNewRecord)
@@ -307,6 +286,6 @@ class Hocvien extends \yii\db\ActiveRecord
                 $chitietdonhang->save();
             }
         }
-        return parent::afterSave($insert, $changedAttributes); 
+        return parent::afterSave($insert, $changedAttributes);
     }
 }
