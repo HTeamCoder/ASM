@@ -108,15 +108,17 @@ class TuyendungController extends Controller
          if (isset($_POST['Donhangchitiet']))
          {
             array_pop($_POST['Donhangchitiet']);
-            var_dump($_POST['Donhangchitiet']);die;
-            foreach($_POST['Donhangchitiet'] as $key=>$donhangchitiet)
+            if (count($_POST['Donhangchitiet']))
             {
-                if($_POST['Donhangchitiet'][$key]['donhang_id'] == '')
-                    $loi[] = 'Chưa nhập đủ tên đơn hàng';            
+                foreach($_POST['Donhangchitiet'] as $key=>$donhangchitiet)
+                {
+                    if($_POST['Donhangchitiet'][$key]['donhang_id'] == '')
+                        $loi[] = 'Chưa nhập đủ tên đơn hàng';            
+                }
+            }else
+            {
+                 $loi[] = 'Chưa có đơn hàng'; 
             }
-         }else
-         {
-            $loi[] = 'Chưa có đơn hàng';  
          }
          if (count($loi) > 0)
          {
