@@ -25,10 +25,7 @@
 					<th>Điện thoại</th>
 					<td><?= ($hocvien->dienthoai)?$hocvien->dienthoai:'' ?></td>
 				</tr>
-				<tr>
-					<th>Trình độ</th>
-					<td><?= ($hocvien->trinhdohocvan_id)?$hocvien->trinhdohocvan->name:'' ?></td>
-				</tr>
+
 				<tr>
 					<th>Giới tính</th>
 					<td>
@@ -54,56 +51,28 @@
 						</h4>
 					  </div><!-- /.col -->
 					</div>
-					<div class="row">
-						<div class="col-md-3 profile-label">
-				            Mã học viên
-				        </div>
-				        <div class="col-md-3 profile-text">
-				            <strong><?= ($hocvien->ma)?$hocvien->ma:'' ?></strong>
-				        </div>
-				        <div class="col-md-3 profile-label">
-				            Tên học viên
-				        </div>
-				        <div class="col-md-3 profile-text">
-				            <strong><?= ($hocvien->name)?$hocvien->name:'' ?></strong>
-				        </div>
-				    </div>
+
 				    <div class="row">
-					    <div class="col-md-3 profile-label">
-				            Ngày sinh
-				        </div>
-				        <div class="col-md-3 profile-text">
-				            <strong><?= ($hocvien->ngaysinh)?date('d/m/Y',strtotime($hocvien->ngaysinh)):'' ?></strong>
-				        </div>
-				        <div class="col-md-3 profile-label">
-				            Tên tiếng nhật
-				        </div>
-				        <div class="col-md-3 profile-text">
-				            <strong><?= ($hocvien->tentiengnhat)?$hocvien->tentiengnhat:'' ?></strong>
-				        </div>
-				        
-				    </div>
-				    <div class="row">
-						<div class="col-md-3 profile-label">
-				            Giới tính
-				        </div>
-				        <div class="col-md-3 profile-text">
-				            <strong><?= ($hocvien->gioitinh)?$hocvien->gioitinh:'' ?></strong>
-				        </div>
 				        <div class="col-md-3 profile-label">
 				            Chiều cao
 				        </div>
 				        <div class="col-md-3 profile-text">
 				            <strong><?= ($hocvien->chieucao)?$hocvien->chieucao:'' ?></strong>
 				        </div>
+						<div class="col-md-3 profile-label">
+							Cân nặng
+						</div>
+						<div class="col-md-3 profile-text">
+							<strong><?= ($hocvien->cannang)?$hocvien->cannang:'' ?></strong>
+						</div>
 				    </div>
 				    <div class="row">
 						<div class="col-md-3 profile-label">
-				            Cân nặng
-				        </div>
-				        <div class="col-md-3 profile-text">
-				            <strong><?= ($hocvien->cannang)?$hocvien->cannang:'' ?></strong>
-				        </div>
+							Thị lực
+						</div>
+						<div class="col-md-3 profile-text">
+							<strong><?= ($hocvien->thiluc)?$hocvien->thiluc.'/10':'' ?></strong>
+						</div>
 				        <div class="col-md-3 profile-label">
 				            Nhóm máu
 				        </div>
@@ -118,20 +87,20 @@
 				        <div class="col-md-3 profile-text">
 				            <strong><?= ($hocvien->taythuan)?($hocvien->taythuan=='phai'?'Tay phải':'Tay trái'):'' ?></strong>
 				        </div>
-				        <div class="col-md-3 profile-label">
-				            Thị lực
-				        </div>
-				        <div class="col-md-3 profile-text">
-				            <strong><?= ($hocvien->thiluc)?$hocvien->thiluc.'/10':'' ?></strong>
-				        </div>
+						 <div class="col-md-3 profile-label">
+							 Hình xăm
+						 </div>
+						 <div class="col-md-3 profile-text">
+							 <strong><?= ($hocvien->hinhxam)?($hocvien->hinhxam=='phai'?'Tay phải':'Tay trái'):'' ?></strong>
+						 </div>
 				    </div>
 				    <div class="row">
 						<div class="col-md-3 profile-label">
-				            Hình xăm
-				        </div>
-				        <div class="col-md-3 profile-text">
-				            <strong><?= ($hocvien->hinhxam)?($hocvien->hinhxam=='phai'?'Tay phải':'Tay trái'):'' ?></strong>
-				        </div>
+							Bệnh viện
+						</div>
+						<div class="col-md-3 profile-text">
+							<strong><?= ($hocvien->benhvien_id)?$hocvien->benhvien->name:'' ?></strong>
+						</div>
 				        <div class="col-md-3 profile-label">
 				            Ngày khám
 				        </div>
@@ -140,16 +109,11 @@
 				        </div>
 				    </div>
 					<div class="row">
-						<div class="col-md-3 profile-label">
-				            Bệnh viện
-				        </div>
-				        <div class="col-md-3 profile-text">
-				            <strong><?= ($hocvien->benhvien_id)?$hocvien->benhvien->name:'' ?></strong>
-				        </div>
+
 				        <div class="col-md-3 profile-label">
 				        	Ghi chú thể trạng
 				        </div>
-				        <div class="col-md-3 profile-text">
+				        <div class="col-md-9 profile-text">
 				            <strong><?= ($hocvien->ghichuthetrang)?$hocvien->ghichuthetrang:'' ?></strong>
 				        </div>
 				    </div>
