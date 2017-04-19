@@ -146,6 +146,9 @@ class DonhangController extends Controller
         $request = Yii::$app->request;
         $model = $this->findModel($id);       
         $model->ngaythi = date('d/m/Y',strtotime($model->ngaythi));
+        $model->ngayxuatcanh != null?$model->ngayxuatcanh = date('d/m/Y',strtotime($model->ngayxuatcanh)): $model->ngayxuatcanh = '';
+        $model->ngayvevietnam != null? $model->ngayvevietnam = date('d/m/Y',strtotime($model->ngayvevietnam)):$model->ngayvevietnam = '';
+        $model->ngaychotcv != null ?$model->ngaychotcv = date('d/m/Y',strtotime($model->ngaychotcv)):$model->ngaychotcv = '';
         if($request->isAjax){
             /*
             *   Process for ajax request

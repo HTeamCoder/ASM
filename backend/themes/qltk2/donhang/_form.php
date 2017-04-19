@@ -70,7 +70,17 @@ use kartik\select2\Select2;
             ?>
         </div>
     </div>
-  
+    <div class="row">
+        <div class="col-md-4">
+            <?=\common\models\myFuncs::activeDateField($form, $model, 'ngayxuatcanh','Ngày xuất cảnh')?>
+        </div>
+        <div class="col-md-4">
+            <?=\common\models\myFuncs::activeDateField($form, $model, 'ngayvevietnam','Ngày về Việt Nam')?>
+        </div>
+        <div class="col-md-4">
+            <?=\common\models\myFuncs::activeDateField($form, $model, 'ngaychotcv','Ngày chốt CV')?>
+        </div>
+    </div>
 	<?php if (!Yii::$app->request->isAjax){ ?>
 	  	<div class="form-group">
 	        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
