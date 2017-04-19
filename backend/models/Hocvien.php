@@ -231,9 +231,10 @@ class Hocvien extends \yii\db\ActiveRecord
     }
     public function beforeSave($insert)
     {
-        $tinh_id = myFuncs::getIdOtherModel($this->quanhuyen,new Khuvuc(),['name'=>'kieu','value'=>'quanhuyen']);
-        $quan_id = myFuncs::getIdOtherModel($this->quanhuyen,new Khuvuc(),['name'=>'kieu','value'=>'quanhuyen'],['name_more'=>'parent_id','value_more'=>$tinh_id]);
-        $this->khuvuc_id = myFuncs::getIdOtherModel($this->phuongxa,new Khuvuc(),['name'=>'kieu','value'=>'phuongxa'],['name_more'=>'parent_id','value_more'=>$quan_id]);
+        $tinh_id = myFuncs::getIdOtherModel($this->tinhthanh,new Khuvuc(),'name',['name'=>'kieu','value'=>'tinhthanh']);
+        $quan_id = myFuncs::getIdOtherModel($this->quanhuyen,new Khuvuc(),'name',['name'=>'kieu','value'=>'quanhuyen'],['name_more'=>'parent_id','value_more'=>$tinh_id]);
+        
+        $this->khuvuc_id = myFuncs::getIdOtherModel($this->phuongxa,new Khuvuc(),'name',['name'=>'kieu','value'=>'phuongxa'],['name_more'=>'parent_id','value_more'=>$quan_id]);
         $this->nhommau_id = myFuncs::getIdOtherModel($this->nhommau_id,new Nhommau());
         $this->congtacvien_id = myFuncs::getIdOtherModel($this->congtacvien_id,new Congtacvien());
         $this->benhvien_id = myFuncs::getIdOtherModel($this->benhvien_id,new Benhvien());

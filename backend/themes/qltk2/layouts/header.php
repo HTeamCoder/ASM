@@ -74,32 +74,12 @@ $role = User::getRole();
                         </li>
                     </ul>
                 </li>
-                <li class="classic-menu-dropdown">
-                     <a data-toggle="dropdown" href="javascript:;" class="dropdown-toggle" data-hover="megamenu-dropdown" data-close-others="true">
-                        Học viên <i class="fa fa-angle-down"></i>
-                    </a>
-                    <ul class="dropdown-menu pull-left">
-                        <li class="classic-menu-dropdown">
-                            <?=Html::a('<i class="fa fa-bookmark-o"></i> Thêm mới học viên', Yii::$app->urlManager->createUrl(['hocvien/themhocvien']))?>
-                        </li>
-                        <li class="classic-menu-dropdown">
-                            <?=Html::a('<i class="fa fa-bookmark-o"></i> Danh sách học viên', Yii::$app->urlManager->createUrl(['hocvien']))?>
-                        </li>
-                    </ul>
+                 <li class="classic-menu-dropdown">
+                    <?=Html::a('<i class="fa fa-bookmark-o"></i> Học viên', Yii::$app->urlManager->createUrl(['hocvien']))?>
                 </li>
                  <li class="classic-menu-dropdown">
-                     <a data-toggle="dropdown" href="javascript:;" class="dropdown-toggle" data-hover="megamenu-dropdown" data-close-others="true">
-                        Tuyển dụng <i class="fa fa-angle-down"></i>
-                    </a>
-                    <ul class="dropdown-menu pull-left">
-                        <li class="classic-menu-dropdown">
-                            <?=Html::a('<i class="fa fa-bookmark-o"></i> Đăng ký', Yii::$app->urlManager->createUrl(['tuyendung/dangky']))?>
+                            <?=Html::a('<i class="fa fa-bookmark-o"></i> Tuyển dụng', Yii::$app->urlManager->createUrl(['tuyendung/dangky']))?>
                         </li>
-                        <li class="classic-menu-dropdown">
-                            <?=Html::a('<i class="fa fa-bookmark-o"></i> Danh sách tuyển dụng', Yii::$app->urlManager->createUrl(['tuyendung']))?>
-                        </li>
-                    </ul>
-                </li>
                  <li class="classic-menu-dropdown">
                     <?=Html::a('<i class="fa fa-bookmark-o"></i> Đào tạo', Yii::$app->urlManager->createUrl(['daotao']))?>
                 </li>

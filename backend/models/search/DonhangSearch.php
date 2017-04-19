@@ -19,7 +19,7 @@ class DonhangSearch extends Donhang
     {
         return [
             [['id', 'vunglamviec_id', 'nghiepdoan_id', 'xinghiep_id', 'noidaotaosautrungtuyen_id', 'donvicungcapnguon_id'], 'integer'],
-            [['name', 'code', 'thoigiantaptrung', 'ngaythi', 'diachilienhe', 'noilamviec', 'ghichu', 'ngaydo', 'ngayxuatcanh', 'ngayvevietnam','ngaychotcv'], 'safe'],
+            [['name', 'code', 'thoigiantaptrung', 'ngaythi', 'diachilienhe', 'noilamviec', 'ghichu', 'ngaydo'], 'safe'],
         ];
     }
 
@@ -65,8 +65,6 @@ class DonhangSearch extends Donhang
             'xinghiep_id' => $this->xinghiep_id,
             'noidaotaosautrungtuyen_id' => $this->noidaotaosautrungtuyen_id,
             'donvicungcapnguon_id' => $this->donvicungcapnguon_id,
-            'ngayxuatcanh' => $this->ngayxuatcanh,
-            'ngayvevietnam' => $this->ngayvevietnam,
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])

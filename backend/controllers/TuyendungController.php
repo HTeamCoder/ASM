@@ -68,15 +68,13 @@ class TuyendungController extends Controller
         if (isset($_GET['id'])&&$_GET['id']!='')
         {
             $hocvien = Hocvien::findOne(intval(trim($_GET['id'])));
-            $donhangchitiet = Donhangchitiet::findAll(['hocvien_id'=>intval(trim($_GET['id']))]);
         }else
         {
             $hocvien = new Hocvien();
-            $donhangchitiet = new Donhangchitiet();
+            $hocvien->ma = 'HV-'.time();
         }
          return $this->render('dangky', [
-            'hocvien' => $hocvien,
-            'donhangchitiet' => $donhangchitiet,
+            'hocvien' => $hocvien
         ]);
     }
 
@@ -88,55 +86,33 @@ class TuyendungController extends Controller
      */
     public function actionLuudangky()
     {
-        $loi = [];
         if (isset($_POST['Hocvien']))
         {
             $hocvien = Hocvien::findOne(['ma'=>$_POST['Hocvien']['ma']]);
             if (!is_null($hocvien))
-                $hocvien->load(\Yii::$app->request->post());
-        }else
-        {
-            $loi[] = 'Không tồn tại học viên này';
-        }
-        
-        if ($_POST['Hocvien']['ma']=='')
-            $loi[] = 'Mã học viên không được để trống';
-        if ($_POST['Hocvien']['name'] == '')
-             $loi[] = 'Tên học viên không được để trống';
-
-
-         if (isset($_POST['Donhangchitiet']))
-         {
-            array_pop($_POST['Donhangchitiet']);
-            if (count($_POST['Donhangchitiet']))
             {
-                foreach($_POST['Donhangchitiet'] as $key=>$donhangchitiet)
-                {
-                    if($_POST['Donhangchitiet'][$key]['donhang_id'] == '')
-                        $loi[] = 'Chưa nhập đủ tên đơn hàng';            
-                }
+                $hocvien->load(Yii::$app->request->post());
+            }
+            else
+            {
+                $hocvien = new Hocvien();
+                $hocvien->load(Yii::$app->request->post());
+            }
+            
+            if ($hocvien->validate())
+            {
+                if ($hocvien->save())
+                    echo Json::encode(['error' => false, 'message' => myFuncs::getMessage('Thông báo','success',"Đã lưu học viên!")]);
             }else
             {
-                 $loi[] = 'Chưa có đơn hàng'; 
+                $loi = [];
+                foreach($hocvien->getErrors() as $item)
+                {
+                    $loi[] = $item[0];
+                }
+                echo Json::encode(['error' => true, 'message' => myFuncs::getMessage('Thông báo lỗi','danger',implode('</br>', $loi))]);
             }
-         }
-         if (count($loi) > 0)
-         {
-            echo Json::encode(['error' => true,'message' => myFuncs::getMessage('Lỗi','danger',implode('<br/>',$loi))]);
-         }else
-         {
-            $hocvien->save();
-
-            foreach($_POST['Donhangchitiet'] as $key=>$chitiet)
-            {
-                $donhangchitiet = new Donhangchitiet();
-                $donhangchitiet->hocvien_id = $hocvien->id;
-                $donhangchitiet->donhang_id = myFuncs::getIdOtherModel($chitiet['donhang_id'],new Donhang());
-                $donhangchitiet->ghichu = $chitiet['ghichu'];
-                $donhangchitiet->save();
-            }
-            echo Json::encode(['error' => false,'message' => myFuncs::getMessage('Thông báo','success', 'Đã lưu xong')]);
-         }
+        }
        
     }
     public function actionCapnhathocvien()
@@ -157,77 +133,6 @@ class TuyendungController extends Controller
             return $this->goHome();
         }
         
-       
-    }
-    public function actionLuuhocvien()
-    {
-        if (isset($_POST['Hocvien']))
-        {
-            
-            if (isset($_POST['Hocvien']['id']))
-            {
-                $hocvien = Hocvien::findOne($_POST['Hocvien']['id']);
-            }
-            else
-                $hocvien = new Hocvien();
-
-            $hocvien->load(Yii::$app->request->post());
-            if ($hocvien->validate())
-            {
-                if ($hocvien->save())
-                    echo Json::encode(['error' => false, 'message' => myFuncs::getMessage('Thông báo','success',"Đã lưu học viên!")]);
-            }else
-            {
-                $loi = [];
-                foreach($hocvien->getErrors() as $item)
-                {
-                    $loi[] = $item[0];
-                }
-                echo Json::encode(['error' => true, 'message' => myFuncs::getMessage('Thông báo lỗi','danger',implode('</br>', $loi))]);
-            }
-        }
-    }
-    
-    public function actionXoahocvien()
-    {
-       if (isset($_POST['mahocvien'])&&intval(trim($_POST['mahocvien']))!='')
-        {
-            $hocvien = Hocvien::findOne(intval(trim($_POST['mahocvien'])));
-            if ($hocvien->delete())
-                echo Json::encode(['error' => false, 'message' => myFuncs::getMessage('Thông báo lỗi','success','Đã xóa học viên')]);
-            else
-                echo Json::encode(['error' => true, 'message' => myFuncs::getMessage('Thông báo lỗi','danger','Xóa học viên không thành công')]);
-        }
-    }
-
-     /**
-     * Delete multiple existing Hocvien model.
-     * For ajax request will return json object
-     * and for non-ajax request if deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionBulkDelete()
-    {        
-        $request = Yii::$app->request;
-        $pks = explode(',', $request->post( 'pks' )); // Array or selected records primary keys
-        foreach ( $pks as $pk ) {
-            $model = $this->findModel($pk);
-            $model->delete();
-        }
-
-        if($request->isAjax){
-            /*
-            *   Process for ajax request
-            */
-            Yii::$app->response->format = Response::FORMAT_JSON;
-            return ['forceClose'=>true,'forceReload'=>'#crud-datatable-pjax'];
-        }else{
-            /*
-            *   Process for non-ajax request
-            */
-            return $this->redirect(['index']);
-        }
        
     }
 

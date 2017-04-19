@@ -197,7 +197,20 @@ class HocvienController extends Controller
         if(isset($_POST['item'])){
             $hocvien = Hocvien::find()->where('(ma = :d or name = :d)',[':d' => $_POST['item']])->one();
             $hocvien->ngaysinh = date('d/m/Y',strtotime($hocvien->ngaysinh));
-            echo Json::encode($hocvien);
+            $hocvien->ngaycap = date('d/m/Y',strtotime($hocvien->ngaycap));
+            $hocvien->ngaykham = date('d/m/Y',strtotime($hocvien->ngaykham));
+            $hocvien->trinhdohocvan_id = $hocvien->trinhdohocvan->name;
+            $hocvien->congtacvien_id = $hocvien->congtacvien->name;
+            $khuvuc = Khuvuc::findOne($hocvien->khuvuc_id);
+            $hocvien->phuongxa = $khuvuc->name;
+            $hocvien->quanhuyen = $khuvuc->parent->name;
+            $hocvien->tinhthanh = $khuvuc->parent->parent->name;
+            $hocvien->noisinh = ((isset(Khuvuc::findOne($hocvien->noisinh)->name)))?Khuvuc::findOne($hocvien->noisinh)->name:'';
+            $hocvien->noicap = ((isset(Khuvuc::findOne($hocvien->noicap)->name)))?Khuvuc::findOne($hocvien->noicap)->name:'';
+            $hocvien->noihoctap = ((isset(Khuvuc::findOne($hocvien->noihoctap)->name)))?Khuvuc::findOne($hocvien->noihoctap)->name:'';
+            $hocvien->nhommau_id = $hocvien->nhommau->name;
+            $hocvien->benhvien_id = (isset($hocvien->benhvien->name))?$hocvien->benhvien->name:'';
+            echo Json::encode(['hocvien'=>$hocvien,'diachi'=>['phuongxa'=>$hocvien->phuongxa,'quanhuyen'=>$hocvien->quanhuyen,'tinhthanh'=>$hocvien->tinhthanh]]);
         }
     }
 }

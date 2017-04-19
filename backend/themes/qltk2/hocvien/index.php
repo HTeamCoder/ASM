@@ -27,8 +27,8 @@ CrudAsset::register($this);
             'columns' => require(__DIR__.'/_columns.php'),
             'toolbar'=> [
                 ['content'=>
-                    Html::a('<i class="glyphicon glyphicon-plus"></i> Thêm mới học viên',Url::toRoute(['hocvien/themhocvien']),
-                    ['title'=> 'Thêm mới học viên','class'=>'btn btn-success','data-pjax'=>0])
+                    Html::a('<i class="glyphicon glyphicon-plus"></i> Đăng ký tuyển dụng',Url::toRoute(['tuyendung/dangky']),
+                    ['title'=> 'Đăng ký tuyển dụng','class'=>'btn btn-success','data-pjax'=>0])
                 ],
             ],          
             'striped' => false,
