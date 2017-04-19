@@ -19,7 +19,7 @@ class DonhangSearch extends Donhang
     {
         return [
             [['id', 'vunglamviec_id', 'nghiepdoan_id', 'xinghiep_id', 'noidaotaosautrungtuyen_id', 'donvicungcapnguon_id'], 'integer'],
-            [['name', 'code', 'thoigiantaptrung', 'ngaythi', 'diachilienhe', 'noilamviec', 'ghichu', 'ngaydo', 'ngayxuatcanh', 'ngayvevietnam'], 'safe'],
+            [['name', 'code', 'thoigiantaptrung', 'ngaythi', 'diachilienhe', 'noilamviec', 'ghichu', 'ngaydo', 'ngayxuatcanh', 'ngayvevietnam','ngaychotcv'], 'safe'],
         ];
     }
 
