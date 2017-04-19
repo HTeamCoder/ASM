@@ -1,6 +1,7 @@
 <?php 
 $this->title = "Đăng ký tuyển dụng | TTS ASV";
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\widgets\ActiveForm;
  ?>
 <div class="thongbao"></div>
@@ -167,6 +168,8 @@ use yii\widgets\ActiveForm;
 </div>
 <?=\yii\bootstrap\Html::button('<i class="fa fa-save"></i> Lưu và đăng ký học viên mới',['class' => 'btn btn-dangky btn-success','data-type'=>'new'])?>
 <?=\yii\bootstrap\Html::button('<i class="fa fa-save"></i> Lưu và quay lại danh sách học viên',['class' => 'btn btn-dangky btn-success','data-type'=>'old'])?>
+<?= Html::a('<i class="fa fa-arrow-left"></i> Hủy và quay lại danh sách',Url::toRoute(['tuyendung/dangky']),
+                    ['title'=> 'Đăng ký tuyển dụng','class'=>'btn btn-warning','data-pjax'=>0])?>
 <?php $this->registerCssFile(Yii::$app->request->baseUrl.'/backend/themes/qltk2/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css') ?>
 <?php $this->registerJsFile(Yii::$app->request->baseUrl.'/backend/themes/qltk2/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js',[ 'depends' => ['backend\assets\Qltk2Asset'], 'position' => \yii\web\View::POS_END ]); ?>
 <?php $this->registerJsFile(Yii::$app->request->baseUrl.'/backend/themes/qltk2/assets/global/scripts/bootstrap3-typeahead.js',[ 'depends' => ['backend\assets\Qltk2Asset'], 'position' => \yii\web\View::POS_END ]); ?>

@@ -68,6 +68,17 @@ class TuyendungController extends Controller
         if (isset($_GET['id'])&&$_GET['id']!='')
         {
             $hocvien = Hocvien::findOne(intval(trim($_GET['id'])));
+            $hocvien->congtacvien_id = ($hocvien->congtacvien_id)?Congtacvien::findOne($hocvien->congtacvien_id)->name:$hocvien->congtacvien_id;
+            $hocvien->trinhdohocvan_id = ($hocvien->trinhdohocvan_id)?Trinhdohocvan::findOne($hocvien->trinhdohocvan_id)->name:$hocvien->trinhdohocvan_id;
+            $hocvien->nhommau_id = ($hocvien->nhommau_id)?Nhommau::findOne($hocvien->nhommau_id)->name:$hocvien->nhommau_id;
+            $hocvien->phuongxa = ($hocvien->khuvuc_id)?Khuvuc::findOne($hocvien->khuvuc_id)->name:$hocvien->phuongxa;
+            $hocvien->quanhuyen = ($hocvien->khuvuc_id)?Khuvuc::findOne($hocvien->khuvuc_id)->parent->name:$hocvien->quanhuyen;
+             $hocvien->tinhthanh = ($hocvien->khuvuc_id)?Khuvuc::findOne($hocvien->khuvuc_id)->parent->parent->name:$hocvien->tinhthanh;
+             $hocvien->noisinh = ($hocvien->noisinh)?Khuvuc::findOne($hocvien->noisinh)->name:'';
+             $hocvien->noihoctap = ($hocvien->noihoctap)?Khuvuc::findOne($hocvien->noihoctap)->name:'';
+             $hocvien->noicap = ($hocvien->noicap)?Khuvuc::findOne($hocvien->noicap)->name:'';
+             $hocvien->ngaysinh = ($hocvien->ngaysinh)?date('d/m/Y',strtotime($hocvien->ngaysinh)):date('d/m/Y');
+             $hocvien->ngaycap = ($hocvien->ngaycap)?date('d/m/Y',strtotime($hocvien->ngaycap)):date('d/m/Y');
         }else
         {
             $hocvien = new Hocvien();

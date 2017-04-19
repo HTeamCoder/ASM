@@ -155,7 +155,7 @@ class Hocvien extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getLop()
+    public function getLopchitiet()
     {
         return $this->hasOne(Lopchitiet::className(), ['id' => 'lop_id']);
     }

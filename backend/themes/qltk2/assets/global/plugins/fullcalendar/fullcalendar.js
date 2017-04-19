@@ -1610,6 +1610,7 @@ function EventManager(options) { // assumed to be a calendar
 
 	var miscCopyableProps = [
 		'title',
+		'dataid',
 		'url',
 		'allDay',
 		'className',
@@ -5180,7 +5181,7 @@ $.extend(DayGrid.prototype, {
 					''
 					) +
 			'>' +
-				'<div class="fc-content">' +
+				'<div class="fc-content"><input type="hidden" class="idlichhen"  value='+event.dataid+'/>'+
 					(isRTL ?
 						titleHtml + ' ' + timeHtml : // put a natural space in between
 						timeHtml + ' ' + titleHtml   //

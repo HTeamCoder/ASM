@@ -2,13 +2,8 @@
 namespace backend\controllers;
 
 
-use backend\models\ChiPhiKhac;
-use backend\models\DonViTinh;
-use backend\models\HouseBill;
-use backend\models\KhoCang;
-use backend\models\MasterBillOfLoading;
-use backend\models\search\ChiTietHBLSearch;
-use backend\models\Vessel;
+use backend\models\Donhang;
+use backend\models\Hocvien;
 use Yii;
 use yii\base\Exception;
 use yii\helpers\Json;
@@ -18,7 +13,6 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\LoginForm;
 use common\models\myFuncs;
-
 /**
  * Site controller
  */
@@ -79,7 +73,9 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
-        return $this->render('index');
+        $hocvien_count = Hocvien::find()->count();
+        $donhangs = Donhang::find()->orderBy('id DESC')->all();
+        return $this->render('index',['donhangs'=>$donhangs,'hocvien_count'=>$hocvien_count]);
     }
 
     public function actionLogin()
@@ -97,7 +93,10 @@ class SiteController extends Controller
             ]);
         }
     }
-
+    public function actionGetlichthidonhang(){
+        $donhang = Donhang::find()->select('ngaythi,id,name')->all();
+        echo Json::encode($donhang);
+    }
     public function actionLogout()
     {
         Yii::$app->user->logout();

@@ -86,55 +86,7 @@ class HocvienController extends Controller
         return $this->render('create',['hocvien'=>$hocvien,'khoa'=> new Khoa(),'lop'=>new Lop(),'donhangchitiet'=>new Donhangchitiet(),'donhang'=>new Donhang()]);
        
     }
-    public function actionCapnhathocvien()
-    {
-        if (isset($_GET['id'])&&$_GET['id']!='')
-        {
-            $hocvien = Hocvien::findOne($_GET['id']);
-            $hocvien->congtacvien_id = ($hocvien->congtacvien_id)?Congtacvien::findOne($hocvien->congtacvien_id)->name:$hocvien->congtacvien_id;
-            $hocvien->trinhdohocvan_id = ($hocvien->trinhdohocvan_id)?Trinhdohocvan::findOne($hocvien->trinhdohocvan_id)->name:$hocvien->trinhdohocvan_id;
-            $hocvien->nhommau_id = ($hocvien->nhommau_id)?Nhommau::findOne($hocvien->nhommau_id)->name:$hocvien->nhommau_id;
-            $hocvien->phuongxa = ($hocvien->khuvuc_id)?Khuvuc::findOne($hocvien->khuvuc_id)->name:$hocvien->phuongxa;
-            $hocvien->quanhuyen = ($hocvien->khuvuc_id)?Khuvuc::findOne($hocvien->khuvuc_id)->parent->name:$hocvien->quanhuyen;
-             $hocvien->tinhthanh = ($hocvien->khuvuc_id)?Khuvuc::findOne($hocvien->khuvuc_id)->parent->parent->name:$hocvien->tinhthanh;
-             $hocvien->ngaysinh = ($hocvien->ngaysinh)?date('d/m/Y',strtotime($hocvien->ngaysinh)):date('d/m/Y');
-            return $this->render('update',['hocvien'=>$hocvien,'khoa'=> new Khoa(),'lop'=>new Lop(),'donhangchitiet'=>new Donhangchitiet(),'donhang'=>new Donhang()]);
-        }else
-        {
-            return $this->goHome();
-        }
-        
-       
-    }
-    public function actionLuuhocvien()
-    {
-        if (isset($_POST['Hocvien']))
-        {
-            
-            if (isset($_POST['Hocvien']['id']))
-            {
-                $hocvien = Hocvien::findOne($_POST['Hocvien']['id']);
-            }
-            else
-                $hocvien = new Hocvien();
 
-            $hocvien->load(Yii::$app->request->post());
-            if ($hocvien->validate())
-            {
-                if ($hocvien->save())
-                    echo Json::encode(['error' => false, 'message' => myFuncs::getMessage('Thông báo','success',"Đã lưu học viên!")]);
-            }else
-            {
-                $loi = [];
-                foreach($hocvien->getErrors() as $item)
-                {
-                    $loi[] = $item[0];
-                }
-                echo Json::encode(['error' => true, 'message' => myFuncs::getMessage('Thông báo lỗi','danger',implode('</br>', $loi))]);
-            }
-        }
-    }
-    
     public function actionXoahocvien()
     {
        if (isset($_POST['mahocvien'])&&intval(trim($_POST['mahocvien']))!='')

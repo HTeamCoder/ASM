@@ -32,8 +32,20 @@
 						<?= ($hocvien->gioitinh)?$hocvien->gioitinh:'' ?>
 					</td>
 				</tr>
+				<tr>
+					<th>Khóa học</th>
+					<td>
+						<?= (isset($hocvien->lopchitiet->khoa->name))?$hocvien->lopchitiet->khoa->name:'' ?>
+					</td>
+				</tr>
+				<tr>
+					<th>Lớp học</th>
+					<td>
+						<?= (isset($hocvien->lopchitiet->lop->name))?$hocvien->lopchitiet->lop->name:'' ?>
+					</td>
+				</tr>
 			</tbody></table>
-			<a class="btn btn-primary btn-sm text-center" href="<?=Yii::$app->urlManager->createUrl(['hocvien/capnhathocvien','id'=>$hocvien->id]) ?>"><i class="fa fa-edit"></i> Chỉnh sửa</a>
+			<a class="btn btn-primary btn-sm text-center" href="<?=Yii::$app->urlManager->createUrl(['tuyendung/dangky','id'=>$hocvien->id]) ?>"><i class="fa fa-edit"></i> Chỉnh sửa</a>
 			<a class="btn btn-danger btn-sm text-center btn-remove-hocvien" id="hocvien-<?= $hocvien->id ?>" href="<?=Yii::$app->urlManager->createUrl(['hocvien/xoahocvien','id'=>$hocvien->id]) ?>"><i class="fa fa-trash"></i> Xóa</a>
 		</div>
 		<div class="col-lg-9 profile-data">
@@ -57,13 +69,13 @@
 				            Chiều cao
 				        </div>
 				        <div class="col-md-3 profile-text">
-				            <strong><?= ($hocvien->chieucao)?$hocvien->chieucao:'' ?></strong>
+				            <strong><?= ($hocvien->chieucao)?$hocvien->chieucao:'' ?> cm</strong>
 				        </div>
 						<div class="col-md-3 profile-label">
 							Cân nặng
 						</div>
 						<div class="col-md-3 profile-text">
-							<strong><?= ($hocvien->cannang)?$hocvien->cannang:'' ?></strong>
+							<strong><?= ($hocvien->cannang)?$hocvien->cannang:'' ?> kg</strong>
 						</div>
 				    </div>
 				    <div class="row">
@@ -172,13 +184,13 @@
 				           Ngày cấp
 				        </div>
 				        <div class="col-md-3 profile-text">
-				            <strong><?= ($hocvien->ngaycap)?date('d/m/Y'.strtotime($hocvien->ngaycap)):'' ?></strong>
+				            <strong><?= ($hocvien->ngaycap)?date('d/m/Y',strtotime($hocvien->ngaycap)):'' ?></strong>
 				        </div>
 				        <div class="col-md-3 profile-label">
 				            Nơi cấp
 				        </div>
 				        <div class="col-md-3 profile-text">
-				            <strong><?= ($hocvien->noicap)?$hocvien->noicap:'' ?></strong>
+				            <strong><?= ($hocvien->noicap)?$hocvien->noicap0->name:'' ?></strong>
 				        </div>
 				    </div>
 				    <div class="row">
@@ -186,13 +198,13 @@
 				           Nơi sinh
 				        </div>
 				        <div class="col-md-3 profile-text">
-				            <strong><?= ($hocvien->noisinh)?$hocvien->khuvuc->name:'' ?></strong>
+				            <strong><?= ($hocvien->noisinh)?$hocvien->noisinh0->name:'' ?></strong>
 				        </div>
 				        <div class="col-md-3 profile-label">
 				            Nơi học tập
 				        </div>
 				        <div class="col-md-3 profile-text">
-				            <strong><?= ($hocvien->noihoctap)?$hocvien->khuvuc->name:'' ?></strong>
+				            <strong><?= ($hocvien->noihoctap)?$hocvien->noihoctap0->name:'' ?></strong>
 				        </div>
 				    </div>
 				    <div class="row">
@@ -206,7 +218,7 @@
 				            Sở thích
 				        </div>
 				        <div class="col-md-3 profile-text">
-				            <strong><?= ($hocvien->noihoctap)?$hocvien->khuvuc->name:'' ?></strong>
+				            <strong><?= ($hocvien->sothich)?$hocvien->sothich:'' ?></strong>
 				        </div>
 				    </div>
 				    
@@ -219,13 +231,40 @@
 						</h4>
 					  </div><!-- /.col -->
 					</div>
-				
+					<div class="row">
+						<div class="col-md-3 profile-label">
+				           Khóa học
+				        </div>
+				        <div class="col-md-3 profile-text">
+				            <strong><?= (isset($hocvien->lopchitiet->khoa->name))?$hocvien->lopchitiet->khoa->name:'' ?></strong>
+				        </div>
+				        <div class="col-md-3 profile-label">
+				           Lớp học 
+				        </div>
+				        <div class="col-md-3 profile-text">
+				            <strong><?= (isset($hocvien->lopchitiet->lop->name))?$hocvien->lopchitiet->lop->name:'' ?></strong>
+				        </div>
+				    </div>
+				    <div class="row">
+						<div class="col-md-3 profile-label">
+				           Ngày nhập học
+				        </div>
+				        <div class="col-md-3 profile-text">
+				            <strong><?= ($hocvien->ngaynhaptruong)?$hocvien->ngaynhaptruong:'' ?></strong>
+				        </div>
+				        <div class="col-md-3 profile-label">
+				           Tình trạng
+				        </div>
+				        <div class="col-md-3 profile-text">
+				            <strong></strong>
+				        </div>
+				    </div>
 				</div>
 				<div class="tab-pane" id="donhang">
 					<div class="row">
 					  <div class="col-xs-12">
 						<h4 class="page-header">	
-						<i class="fa fa-graduation-cap"></i> Thông tin đơn hàng
+						<i class="fa fa-graduation-cap"></i> Đơn hàng đã đăng ký
 						</h4>
 					  </div><!-- /.col -->
 					</div>

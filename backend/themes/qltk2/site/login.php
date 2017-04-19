@@ -29,7 +29,7 @@ $fieldOptions2 = [
 <!-- BEGIN HEAD -->
 <head>
     <meta charset="utf-8"/>
-    <title>HỆ THỐNG QUẢN LÝ TTSKN</title>
+    <title>HỆ THỐNG QUẢN LÝ TTSKN ASV</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
@@ -64,7 +64,7 @@ $fieldOptions2 = [
 <!-- BEGIN LOGO -->
 <div class="logo">
     <a href="#" style="font-size: 18pt; text-decoration: none">
-        HỆ THỐNG QUẢN LÝ TTSKN<br/>ĐĂNG NHẬP
+        HỆ THỐNG QUẢN LÝ TTSKN ASV<br/>ĐĂNG NHẬP
     </a>
 </div>
 <!-- END LOGO -->

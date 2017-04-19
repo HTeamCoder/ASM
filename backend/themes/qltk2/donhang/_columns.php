@@ -20,16 +20,19 @@ return [
     ],
     [
         'class'=>'\kartik\grid\DataColumn',
-        'attribute'=>'code',
-    ],
-    [
-        'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'ngaythi',
+        'value'=>function($data){
+            return date('d/m/Y',strtotime($data->ngaythi));
+        }
         
     ],
     [
         'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'diachilienhe',
+        'value'=>function($data)
+        {
+            return ($data->diachilienhe)?$data->diachilienhe:'';
+        }
     ],
     // [
         // 'class'=>'\kartik\grid\DataColumn',
