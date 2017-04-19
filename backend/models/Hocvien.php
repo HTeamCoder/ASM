@@ -74,7 +74,7 @@ class Hocvien extends \yii\db\ActiveRecord
         return [
             [['ma', 'name', 'gioitinh', 'ngaysinh', 'chieucao', 'cannang','trinhdohocvan_id','phuongxa','quanhuyen','tinhthanh'], 'required'],
             [['gioitinh', 'tinhtranghonnhan', 'kinhnghiemcv', 'taythuan', 'ghichuthetrang'], 'string'],
-            [['ngaysinh', 'ngaycap', 'ngaynhaptruong', 'ngaykham','khuvuc_id','noicap', 'noihoctap', 'noisinh','anhdaidien','nhommau_id','trinhdohocvan_id', 'benhvien_id','congtacvien_id'], 'safe'],
+            [['ngaysinh', 'ngaycap', 'ngaynhaptruong', 'ngaykham','khuvuc_id','noicap', 'noihoctap', 'noisinh','anhdaidien','nhommau_id','trinhdohocvan_id', 'benhvien_id','congtacvien_id','chuyennganh_id'], 'safe'],
             [['tuoi', 'thiluc', 'lop_id','loaidanhsach_id'], 'integer'],
             [['ma', 'code', 'tentiengnhat', 'sothich', 'daunguon'], 'string', 'max' => 255],
             [['name'], 'string', 'max' => 100],

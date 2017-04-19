@@ -52,6 +52,9 @@ $role = User::getRole();
                             <?=Html::a('<i class="fa fa-bookmark-o"></i> Trình độ học vấn', Yii::$app->urlManager->createUrl(['trinhdohocvan']))?>
                         </li>
                         <li class="classic-menu-dropdown">
+                            <?=Html::a('<i class="fa fa-bookmark-o"></i> Chuyên ngành', Yii::$app->urlManager->createUrl(['chuyennganh']))?>
+                        </li>
+                        <li class="classic-menu-dropdown">
                             <?=Html::a('<i class="fa fa-bookmark-o"></i> Xí nghiệp', Yii::$app->urlManager->createUrl(['xinghiep']))?>
                         </li>
                         <li class="classic-menu-dropdown">

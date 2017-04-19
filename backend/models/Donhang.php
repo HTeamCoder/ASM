@@ -48,6 +48,7 @@ class Donhang extends \yii\db\ActiveRecord
             [['name','vunglamviec_id', 'nghiepdoan_id', 'xinghiep_id', 'donvicungcapnguon_id'], 'required'],
             [['thoigiantaptrung', 'ngaythi', 'ngaydo','vunglamviec_id', 'nghiepdoan_id', 'xinghiep_id', 'noidaotaosautrungtuyen_id', 'donvicungcapnguon_id'], 'safe'],
             [['diachilienhe', 'ghichu'], 'string'],
+            [['ngayxuatcanh', 'ngayvevietnam'], 'safe'],
             [['name', 'code', 'noilamviec'], 'string', 'max' => 255],
             [['vunglamviec_id'], 'exist', 'skipOnError' => true, 'targetClass' => Vunglamviec::className(), 'targetAttribute' => ['vunglamviec_id' => 'id']],
             [['nghiepdoan_id'], 'exist', 'skipOnError' => true, 'targetClass' => Nghiepdoan::className(), 'targetAttribute' => ['nghiepdoan_id' => 'id']],
