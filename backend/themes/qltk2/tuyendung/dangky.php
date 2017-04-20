@@ -70,8 +70,9 @@ use yii\widgets\ActiveForm;
                                         <div class="col-md-3">
                                             <?= $form->field($hocvien, 'noihoctap')->textInput(['class'=>'noihoctap form-control','autocomplete'=>'off','placeholder'=>'Nơi học tập'])->label('Nơi học tập') ?>
                                         </div>
+
                                         <div class="col-md-3">
-                                            <?= $form->field($hocvien, 'tinhtranghonnhan')->dropDownList([ 'docthan' => 'Độc thân', 'dakethon' => 'Đã kết hôn']) ?>
+                                            <?=\common\models\myFuncs::activeDateField($form, $hocvien, 'ngaytuyendung','Ngày tuyển dụng')?>
                                         </div>
                                         <div class="col-md-3">
                                             <?= $form->field($hocvien, 'diachi')->textInput(['placeholder'=>'Địa chỉ nơi ở'])->label('Địa chỉ nơi ở'); ?>
@@ -122,7 +123,21 @@ use yii\widgets\ActiveForm;
                                         <?= $form->field($hocvien, 'kinhnghiemcv')->textarea(['rows' => 3]) ?>
                                     </div>
                                     <div class="col-md-6">
-                                        <?= $form->field($hocvien, 'sothich')->textarea(['rows' => 3]) ?>
+                                        <?= $form->field($hocvien, 'nguyenvong')->textarea(['rows' => 3]) ?>
+
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <?= $form->field($hocvien, 'sothich')->textarea(['rows' => 1]) ?>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <?= $form->field($hocvien, 'tinhtranghonnhan')->dropDownList([ 'docthan' => 'Độc thân', 'dakethon' => 'Đã kết hôn']) ?>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <?= $form->field($hocvien, 'quanhegiadinh')->textarea(['rows' => 3]) ?>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -157,7 +172,12 @@ use yii\widgets\ActiveForm;
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <?= $form->field($hocvien, 'ghichuthetrang')->textarea(['rows' => 1]) ?>
+                                        <?= $form->field($hocvien, 'ghichuthetrang')->textarea(['rows' => 3]) ?>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <?= $form->field($hocvien, 'ghichu')->textarea(['rows' => 3]) ?>
                                     </div>
                                 </div>
 
