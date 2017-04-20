@@ -22,6 +22,10 @@
 					<td><?= ($hocvien->ngaysinh)?date('d/m/Y',strtotime($hocvien->ngaysinh)):'' ?></td>
 				</tr>
 				<tr>
+					<th>Ngày tuyển dụng</th>
+					<td><?= ($hocvien->ngaytuyendung)?date('d/m/Y',strtotime($hocvien->ngaytuyendung)):'' ?></td>
+				</tr>
+				<tr>
 					<th>Điện thoại</th>
 					<td><?= ($hocvien->dienthoai)?$hocvien->dienthoai:'' ?></td>
 				</tr>
@@ -145,6 +149,14 @@
 				    </div>
 					<div class="row">
 						<div class="col-md-3 profile-label">
+							Quan hệ gia đình
+						</div>
+						<div class="col-md-9 profile-text">
+							<strong><?= ($hocvien->quanhegiadinh)?$hocvien->quanhegiadinh:'' ?></strong>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-3 profile-label">
 				            Địa chỉ thường trú
 				        </div>
 				        <div class="col-md-9 profile-text">
@@ -221,7 +233,14 @@
 				            <strong><?= ($hocvien->sothich)?$hocvien->sothich:'' ?></strong>
 				        </div>
 				    </div>
-				    
+					<div class="row">
+						<div class="col-md-3 profile-label">
+							Nguyện vọng
+						</div>
+						<div class="col-md-9 profile-text">
+							<strong><?= ($hocvien->nguyenvong)?$hocvien->nguyenvong:'' ?></strong>
+						</div>
+					</div>
 				</div>
 				<div class="tab-pane" id="hoctap">
 					<div class="row">
